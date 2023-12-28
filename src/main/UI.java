@@ -142,8 +142,8 @@ public class UI {
 
 	public void getImage() {
 		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/otherImage/logo1.png"));
-			text = ImageIO.read(getClass().getResourceAsStream("/otherImage/text.png"));
+			image = ImageIO.read(getClass().getResourceAsStream("/image/title/logo.png"));
+			text = ImageIO.read(getClass().getResourceAsStream("/image/title/text.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
