@@ -18,6 +18,7 @@ public class UI {
 	public BufferedImage image, text;
 	int commandNum = 0;
 	float image_scale = 3 / 4;
+	public int titleScreenState = 0;
 
 	public UI(GamePanel gp) {
 		this.gp = gp;
@@ -48,77 +49,169 @@ public class UI {
 	}
 
 	public void drawTitleScreen() {
+		if (titleScreenState == 0) {
+			g2.setFont(CHLORINR);
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
 
-		g2.setFont(CHLORINR);
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
+			int image_width = (int) (image.getWidth() * 0.7);
+			int image_height = (int) (image.getHeight() * 0.7);
+			g2.drawImage(image, (gp.screenWidth - image_width) / 2, (int) (gp.gridSize * 3.5), image_width,
+					image_height, null);
+			g2.drawImage(text, (gp.screenWidth - text.getWidth() * 5 / 6) / 2, (int) (gp.gridSize * 0.5),
+					text.getWidth() * 5 / 6, text.getHeight() * 5 / 6, null);
+			String text = "DA IST";
+			int x = getXForCenteredText(text);
+			int y = (int) (gp.gridSize * 6.5);
 
-		int image_width = (int)(image.getWidth()*0.7);
-		int image_height = (int)(image.getHeight()*0.7);
-		g2.drawImage(image, (gp.screenWidth - image_width) / 2, (int)(gp.gridSize * 3.5), image_width, image_height, null);
-		g2.drawImage(text, (gp.screenWidth - text.getWidth()*5/6) / 2, (int) (gp.gridSize * 0.5), text.getWidth()*5/6, text.getHeight()*5/6, null);
-		String text = "DA IST";
-		int x = getXForCenteredText(text);
-		int y = (int) (gp.gridSize * 6.5);
-		
-		g2.setFont(pixelFont);
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 50F));
-		
+			g2.setFont(pixelFont);
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 50F));
 
-		// new game
-		text = "NEW GAME";
-		x = getXForCenteredText(text);
-		y = (int) (gp.gridSize * 9.3);
-		drawBorder(text, x, y);
-		g2.setColor(Color.white);
-		g2.drawString(text, x, y);
-		if (commandNum == 0) {
-			recolor(text, x, y);
-			int length = g2.getFontMetrics().stringWidth(text);
-			int length_arrow = g2.getFontMetrics().stringWidth("◄");
-			drawBorder("►", x-gp.gridSize/2-length_arrow, y);
-			g2.setColor(Color.yellow);
-			g2.drawString("►", x-gp.gridSize/2-length_arrow, y);
-			drawBorder("◄", x + length + gp.gridSize/2, y);
-			g2.setColor(Color.yellow);
-			g2.drawString("◄", x + length + gp.gridSize/2, y);
+			// new game
+			text = "NEW GAME";
+			x = getXForCenteredText(text);
+			y = (int) (gp.gridSize * 9.3);
+			drawBorder(text, x, y);
+			g2.setColor(Color.white);
+			g2.drawString(text, x, y);
+			if (commandNum == 0) {
+				recolor(text, x, y);
+				int length = g2.getFontMetrics().stringWidth(text);
+				int length_arrow = g2.getFontMetrics().stringWidth("◄");
+				drawBorder("►", x - gp.gridSize / 2 - length_arrow, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("►", x - gp.gridSize / 2 - length_arrow, y);
+				drawBorder("◄", x + length + gp.gridSize / 2, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("◄", x + length + gp.gridSize / 2, y);
+			}
+
+			text = "OPTION";
+			x = getXForCenteredText(text);
+			y += gp.gridSize * 2;
+			drawBorder(text, x, y);
+			g2.setColor(Color.white);
+			g2.drawString(text, x, y);
+			if (commandNum == 1) {
+				recolor(text, x, y);
+				int length = g2.getFontMetrics().stringWidth(text);
+				int length_arrow = g2.getFontMetrics().stringWidth("◄");
+				drawBorder("►", x - gp.gridSize / 2 - length_arrow, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("►", x - gp.gridSize / 2 - length_arrow, y);
+				drawBorder("◄", x + length + gp.gridSize / 2, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("◄", x + length + gp.gridSize / 2, y);
+			}
+
+			text = "EXIT GAME";
+			x = getXForCenteredText(text);
+			y += gp.gridSize * 2;
+			drawBorder(text, x, y);
+			g2.setColor(Color.white);
+			g2.drawString(text, x, y);
+			if (commandNum == 2) {
+				recolor(text, x, y);
+				int length = g2.getFontMetrics().stringWidth(text);
+				int length_arrow = g2.getFontMetrics().stringWidth("◄");
+				drawBorder("►", x - gp.gridSize / 2 - length_arrow, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("►", x - gp.gridSize / 2 - length_arrow, y);
+				drawBorder("◄", x + length + gp.gridSize / 2, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("◄", x + length + gp.gridSize / 2, y);
+			}
+		} else { 			//choose number of players
+			g2.setFont(CHLORINR);
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
+
+			int image_width = (int) (image.getWidth() * 0.7);
+			int image_height = (int) (image.getHeight() * 0.7);
+			g2.drawImage(image, (gp.screenWidth - image_width) / 2, (int) (gp.gridSize * 3.5), image_width,
+					image_height,
+					null);
+			g2.drawImage(text, (gp.screenWidth - text.getWidth() * 5 / 6) / 2, (int) (gp.gridSize * 0.5),
+					text.getWidth() * 5 / 6, text.getHeight() * 5 / 6, null);
+			String text = "DA IST";
+			int x = getXForCenteredText(text);
+			int y = (int) (gp.gridSize * 6.5);
+
+			g2.setFont(pixelFont);
+			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 50F));
+
+			// choose player
+			text = "2 Players";
+			x = getXForCenteredText(text);
+			y = (int) (gp.gridSize * 9.3);
+			drawBorder(text, x, y);
+			g2.setColor(Color.white);
+			g2.drawString(text, x, y);
+			if (commandNum == 0) {
+				recolor(text, x, y);
+				int length = g2.getFontMetrics().stringWidth(text);
+				int length_arrow = g2.getFontMetrics().stringWidth("◄");
+				drawBorder("►", x - gp.gridSize / 2 - length_arrow, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("►", x - gp.gridSize / 2 - length_arrow, y);
+				drawBorder("◄", x + length + gp.gridSize / 2, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("◄", x + length + gp.gridSize / 2, y);
+			}
+
+			text = "3 Players";
+			x = getXForCenteredText(text);
+			y += gp.gridSize * 2;
+			drawBorder(text, x, y);
+			g2.setColor(Color.white);
+			g2.drawString(text, x, y);
+			if (commandNum == 1) {
+				recolor(text, x, y);
+				int length = g2.getFontMetrics().stringWidth(text);
+				int length_arrow = g2.getFontMetrics().stringWidth("◄");
+				drawBorder("►", x - gp.gridSize / 2 - length_arrow, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("►", x - gp.gridSize / 2 - length_arrow, y);
+				drawBorder("◄", x + length + gp.gridSize / 2, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("◄", x + length + gp.gridSize / 2, y);
+			}
+
+			text = "4 Players";
+			x = getXForCenteredText(text);
+			y += gp.gridSize * 2;
+			drawBorder(text, x, y);
+			g2.setColor(Color.white);
+			g2.drawString(text, x, y);
+			if (commandNum == 2) {
+				recolor(text, x, y);
+				int length = g2.getFontMetrics().stringWidth(text);
+				int length_arrow = g2.getFontMetrics().stringWidth("◄");
+				drawBorder("►", x - gp.gridSize / 2 - length_arrow, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("►", x - gp.gridSize / 2 - length_arrow, y);
+				drawBorder("◄", x + length + gp.gridSize / 2, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("◄", x + length + gp.gridSize / 2, y);
+			}
+			
+			//chưa biết sửa
+			text = "Back";
+			x = getXForCenteredText(text);
+			y += gp.gridSize * 2;
+			drawBorder(text, x, y);
+			g2.setColor(Color.white);
+			g2.drawString(text, x, y);
+			if (commandNum == 3) {
+				recolor(text, x, y);
+				int length = g2.getFontMetrics().stringWidth(text);
+				int length_arrow = g2.getFontMetrics().stringWidth("◄");
+				drawBorder("►", x - gp.gridSize / 2 - length_arrow, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("►", x - gp.gridSize / 2 - length_arrow, y);
+				drawBorder("◄", x + length + gp.gridSize / 2, y);
+				g2.setColor(Color.yellow);
+				g2.drawString("◄", x + length + gp.gridSize / 2, y);
+			}
 		}
-
-		text = "OPTION";
-		x = getXForCenteredText(text);
-		y += gp.gridSize * 2;
-		drawBorder(text, x, y);
-		g2.setColor(Color.white);
-		g2.drawString(text, x, y);
-		if (commandNum == 1) {
-			recolor(text, x, y);
-			int length = g2.getFontMetrics().stringWidth(text);
-			int length_arrow = g2.getFontMetrics().stringWidth("◄");
-			drawBorder("►", x-gp.gridSize/2-length_arrow, y);
-			g2.setColor(Color.yellow);
-			g2.drawString("►", x-gp.gridSize/2-length_arrow, y);
-			drawBorder("◄", x + length + gp.gridSize/2, y);
-			g2.setColor(Color.yellow);
-			g2.drawString("◄", x + length + gp.gridSize/2, y);
-		}
-
-		text = "EXIT GAME";
-		x = getXForCenteredText(text);
-		y += gp.gridSize * 2;
-		drawBorder(text, x, y);
-		g2.setColor(Color.white);
-		g2.drawString(text, x, y);
-		if (commandNum == 2) {
-			recolor(text, x, y);
-			int length = g2.getFontMetrics().stringWidth(text);
-			int length_arrow = g2.getFontMetrics().stringWidth("◄");
-			drawBorder("►", x-gp.gridSize/2-length_arrow, y);
-			g2.setColor(Color.yellow);
-			g2.drawString("►", x-gp.gridSize/2-length_arrow, y);
-			drawBorder("◄", x + length + gp.gridSize/2, y);
-			g2.setColor(Color.yellow);
-			g2.drawString("◄", x + length + gp.gridSize/2, y);
-		}
-
 	}
 
 	public int getXForCenteredText(String text) {

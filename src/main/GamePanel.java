@@ -92,9 +92,9 @@ public class GamePanel extends JPanel implements Runnable {
 			ui.draw(g2);
 			
 		} else if (gameState == playState) {
-//			background.draw(g2);
+			// background.draw(g2);
 
-//			player.draw(g2);
+			// player.draw(g2);
 		}
 
 		g2.dispose();
