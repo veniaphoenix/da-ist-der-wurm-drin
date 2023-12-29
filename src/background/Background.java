@@ -19,7 +19,7 @@ public class Background {
 
 	public void getBackground() {
 		try {
-			background = ImageIO.read(getClass().getResourceAsStream("/image/title/wallpaperflare.com_wallpaper.jpg"));
+			background = ImageIO.read(getClass().getResourceAsStream("/image/title/wallpaperflare.com_wallpaper.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class Dice extends JFrame {
-    private JPanel diePanel;
+    private static final long serialVersionUID = -3862432823066101583L;
+	private JPanel diePanel;
 
     public Dice() {
         // Set up the JFrame
