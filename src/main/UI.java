@@ -10,12 +10,14 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+import entity.DiceRoller;
+
 public class UI {
 
 	GamePanel gp;
 	Graphics2D g2;
 	Font CHLORINR, pixelFont;
-	public BufferedImage image, text;
+	public BufferedImage image, text, diceImage;
 	int commandNum = 0;
 	float image_scale = 3 / 4;
 	public int titleScreenState = 0;
@@ -33,6 +35,8 @@ public class UI {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+
 		getImage();
 	}
 
@@ -44,8 +48,12 @@ public class UI {
 		}
 
 		if (gp.gameState == gp.playState) {
-
+			drawGameScreen();
 		}
+	}
+
+	public void drawGameScreen() {
+		// g2.drawImage(diceImage, getXForCenteredText(""), 750, 96, 96, null);
 	}
 
 	public void drawTitleScreen() {
@@ -141,7 +149,7 @@ public class UI {
 			// choose player
 			text = "2 Players";
 			x = getXForCenteredText(text);
-			y = (int) (gp.gridSize * 9.3);
+			y = (int) (gp.gridSize * 6);
 			drawBorder(text, x, y);
 			g2.setColor(Color.white);
 			g2.drawString(text, x, y);
@@ -193,7 +201,7 @@ public class UI {
 				g2.drawString("◄", x + length + gp.gridSize / 2, y);
 			}
 			
-			//chưa biết sửa
+			//back
 			text = "Back";
 			x = getXForCenteredText(text);
 			y += gp.gridSize * 2;
