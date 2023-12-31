@@ -167,7 +167,7 @@ public class UI {
 
 			text = "3 Players";
 			x = getXForCenteredText(text);
-			y += gp.gridSize * 2;
+			y += gp.gridSize * 1.5;
 			drawBorder(text, x, y);
 			g2.setColor(Color.white);
 			g2.drawString(text, x, y);
@@ -185,7 +185,7 @@ public class UI {
 
 			text = "4 Players";
 			x = getXForCenteredText(text);
-			y += gp.gridSize * 2;
+			y += gp.gridSize * 1.5;
 			drawBorder(text, x, y);
 			g2.setColor(Color.white);
 			g2.drawString(text, x, y);
@@ -201,10 +201,10 @@ public class UI {
 				g2.drawString("◄", x + length + gp.gridSize / 2, y);
 			}
 			
-			//back
+			
 			text = "Back";
 			x = getXForCenteredText(text);
-			y += gp.gridSize * 2;
+			y += gp.gridSize * 1.5;
 			drawBorder(text, x, y);
 			g2.setColor(Color.white);
 			g2.drawString(text, x, y);
