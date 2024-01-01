@@ -11,6 +11,7 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 import entity.DiceRoller;
+import entity.Player;
 
 public class UI {
 
@@ -19,6 +20,7 @@ public class UI {
 	Font CHLORINR, pixelFont;
 	public BufferedImage image, text, diceImage;
 	int commandNum = 0;
+	int numberOfPlayer = 2;
 	float image_scale = 3 / 4;
 	public int titleScreenState = 0;
 
@@ -49,6 +51,10 @@ public class UI {
 
 		if (gp.gameState == gp.playState) {
 			drawGameScreen();
+			// for (int i = 0; i < numberOfPlayer; i++) {
+            // 	Player newPlayer = new Player(gp, gp.keyH, i);
+            // 	gp.addPlayer(newPlayer);
+        	// }
 		}
 	}
 
@@ -163,6 +169,7 @@ public class UI {
 				drawBorder("◄", x + length + gp.gridSize / 2, y);
 				g2.setColor(Color.yellow);
 				g2.drawString("◄", x + length + gp.gridSize / 2, y);
+				
 			}
 
 			text = "3 Players";
@@ -181,6 +188,7 @@ public class UI {
 				drawBorder("◄", x + length + gp.gridSize / 2, y);
 				g2.setColor(Color.yellow);
 				g2.drawString("◄", x + length + gp.gridSize / 2, y);
+
 			}
 
 			text = "4 Players";
@@ -199,6 +207,7 @@ public class UI {
 				drawBorder("◄", x + length + gp.gridSize / 2, y);
 				g2.setColor(Color.yellow);
 				g2.drawString("◄", x + length + gp.gridSize / 2, y);
+
 			}
 			
 			

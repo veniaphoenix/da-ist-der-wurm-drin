@@ -1,18 +1,14 @@
 package main;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import background.Background;
 import entity.DiceRoller;
@@ -30,7 +26,11 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 	KeyHandler keyH = new KeyHandler(this);
-	Player player = new Player(this, keyH);
+	// Player player = new Player(this, keyH);
+	List<Player> players = new ArrayList<>();
+	
+	int currentPlayerIndex = 0;
+
 	DiceRoller dice = new DiceRoller(this, keyH);
 	Sound sound = new Sound();
 	Background background = new Background(this);
@@ -54,10 +54,11 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
-
+		
+		Player newPlayer = new Player(this, this.keyH, 0);
+        this.addPlayer(newPlayer);
 	}
 
-	
 	public void setupGame() {
 		playMusic(0);
 		gameState = titleState;
@@ -90,15 +91,37 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
+	public void addPlayer(Player player) {
+        players.add(player);
+    }
+
+	public void nextPlayer() {
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+    }
+
 	public void update() {
-		player.update();
+		// player.update();
+		Player currentPlayer = players.get(currentPlayerIndex);
+        currentPlayer.update();
 		dice.update();
+        if (ConditionToChangePlayer()) {
+            nextPlayer();
+        }
+
 	}
+
+	public boolean ConditionToChangePlayer() {
+        if (keyH.spacePress) {
+			keyH.spacePress = false;
+			return true;
+		}
+		return false;
+    }
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-
+		
 		if (gameState == titleState) {
 			background.draw(g2);
 			ui.draw(g2);
@@ -107,7 +130,10 @@ public class GamePanel extends JPanel implements Runnable {
 			// background.draw(g2);
 			// ui.draw(g2);
 			dice.draw(g2, 100, 750);
-			player.draw(g2);
+			// player.draw(g2);
+			for (Player player : players) {
+                player.draw(g2);
+            }
 		}
 
 		g2.dispose();
