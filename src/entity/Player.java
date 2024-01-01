@@ -40,19 +40,20 @@ public class Player extends Entity {
 	}
 
 	public void update() {
-		if (keyH.upPressed == true) {
-			direction = "up";
-			y -= speed;
-		} else if (keyH.downPressed == true) {
-			direction = "down";
-			y += speed;
-		} else if (keyH.rightPressed == true) {
-			direction = "right";
-			x += speed;
-		} else if (keyH.leftPressed == true) {
-			direction = "left";
-			x -= speed;
-		}
+//		if (keyH.upPressed == true) {
+//			direction = "up";
+//			y -= speed;
+//		} else if (keyH.downPressed == true) {
+//			direction = "down";
+//			y += speed;
+//		} else if (keyH.rightPressed == true) {
+//			direction = "right";
+//			x += speed;
+//		} else if (keyH.leftPressed == true) {
+//			direction = "left";
+//			x -= speed;
+//		}
+		x += speed;
 	}
 
 	public void draw(Graphics2D g2) {

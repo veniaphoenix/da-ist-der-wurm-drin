@@ -10,9 +10,6 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import entity.DiceRoller;
-import entity.Player;
-
 public class UI {
 
 	GamePanel gp;
@@ -209,7 +206,6 @@ public class UI {
 				g2.drawString("◄", x + length + gp.gridSize / 2, y);
 
 			}
-			
 			
 			text = "Back";
 			x = getXForCenteredText(text);

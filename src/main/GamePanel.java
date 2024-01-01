@@ -88,7 +88,6 @@ public class GamePanel extends JPanel implements Runnable {
 				repaint();
 				delta--;
 			}
-			System.out.println(screenWidth + " " + screenHeight);
 		}
 	}
 
@@ -103,12 +102,11 @@ public class GamePanel extends JPanel implements Runnable {
 	public void update() {
 		// player.update();
 		Player currentPlayer = players.get(currentPlayerIndex);
-        currentPlayer.update();
 		dice.update();
         if (ConditionToChangePlayer()) {
+        	currentPlayer.update();
             nextPlayer();
         }
-
 	}
 
 	public boolean ConditionToChangePlayer() {
