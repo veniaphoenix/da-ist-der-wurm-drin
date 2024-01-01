@@ -13,24 +13,26 @@ public class Player extends Entity {
 
 	GamePanel gp;
 	KeyHandler keyH;
+	int playerIndex;
 
-	public Player(GamePanel gp, KeyHandler keyH) {
+	public Player(GamePanel gp, KeyHandler keyH, int playerIndex) {
 		this.gp = gp;
 		this.keyH = keyH;
+		this.playerIndex = playerIndex;
 		setDefaultValues();
 		getPlayerImage();
 	}
 
 	public void setDefaultValues() {
 		x = 100;
-		y = 100;
+		y = 100 + playerIndex*150;
 		speed = 10;
 		direction = "right";
 	}
 
 	public void getPlayerImage() {
 		try {
-			right = ImageIO.read(getClass().getResourceAsStream("/image/head/blue_head.png"));
+			right = ImageIO.read(getClass().getResourceAsStream("/image/head/head_" + playerIndex + ".png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
