@@ -76,6 +76,7 @@ public class GamePanel extends JPanel implements Runnable {
 				repaint();
 				delta--;
 			}
+			System.out.println(screenWidth + " " + screenHeight);
 		}
 	}
 
