@@ -24,14 +24,13 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int gridSize = 70;
 	int FPS = 60;
 
-
 	KeyHandler keyH = new KeyHandler(this);
 	// Player player = new Player(this, keyH);
 	List<Player> players = new ArrayList<>();
-	
+
 	int currentPlayerIndex = 0;
 
-	DiceRoller dice = new DiceRoller(this, keyH);
+	public DiceRoller dice = new DiceRoller(this, keyH);
 	Sound sound = new Sound();
 	Background background = new Background(this);
 	UI ui = new UI(this);
@@ -42,9 +41,6 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int pauseState = 2;
 	Thread gameThread;
 
-	int playerX = 100;
-	int playerY = 100;
-	int playerSpeed = 5;
 
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -54,13 +50,13 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
-		
+
 		Player newPlayer = new Player(this, this.keyH, 0);
-        this.addPlayer(newPlayer);
+		this.addPlayer(newPlayer);
 	}
 
 	public void setupGame() {
-		playMusic(0);
+//		playMusic(0);
 		gameState = titleState;
 	}
 
@@ -71,7 +67,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	@Override
 	public void run() {
-		double drawInterval = 1000000000/FPS;
+		double drawInterval = 1000000000 / FPS;
 		double delta = 0;
 		long lastTime = System.nanoTime();
 		long currentTime;
@@ -92,47 +88,44 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void addPlayer(Player player) {
-        players.add(player);
-    }
-
+		players.add(player);
+	}
+            
 	public void nextPlayer() {
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-    }
+		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+	}
 
 	public void update() {
-		// player.update();
 		Player currentPlayer = players.get(currentPlayerIndex);
 		dice.update();
-        if (ConditionToChangePlayer()) {
-        	currentPlayer.update();
-            nextPlayer();
-        }
+		currentPlayer.update();
+		if (ConditionToChangePlayer()) {
+			nextPlayer();
+		}
 	}
 
 	public boolean ConditionToChangePlayer() {
-        if (keyH.spacePress) {
-			keyH.spacePress = false;
+		Player currentPlayer = players.get(currentPlayerIndex);
+		if (currentPlayer.changePlayer == true) {
 			return true;
 		}
 		return false;
-    }
+	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		
+
 		if (gameState == titleState) {
-			background.draw(g2);
+			background.draw(g2, titleState);
 			ui.draw(g2);
-			
-		} else if (gameState == playState) {
-			// background.draw(g2);
-			// ui.draw(g2);
+
+		} else if (gameState == playState || gameState == pauseState) {
+			background.draw(g2, playState);
 			dice.draw(g2, 100, 750);
-			// player.draw(g2);
 			for (Player player : players) {
-                player.draw(g2);
-            }
+				player.draw(g2);
+			}
 		}
 
 		g2.dispose();
@@ -152,6 +145,4 @@ public class GamePanel extends JPanel implements Runnable {
 		sound.loadFile(i);
 		sound.play();
 	}
-
-
 }

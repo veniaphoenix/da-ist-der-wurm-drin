@@ -10,7 +10,7 @@ import javax.sound.sampled.FloatControl;
 public class Sound {
 
 	Clip clip;
-	URL soundURL[] = new URL[30];
+	URL soundURL[] = new URL[10];
 
 	public Sound() {
 		soundURL[0] = getClass().getResource("/sound/theme.wav");

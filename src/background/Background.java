@@ -10,7 +10,8 @@ import main.GamePanel;
 
 public class Background {
 	GamePanel gp;
-	public BufferedImage background;
+
+	public BufferedImage image[] = new BufferedImage[10];
 
 	public Background(GamePanel gp) {
 		this.gp = gp;
@@ -19,14 +20,15 @@ public class Background {
 
 	public void getBackground() {
 		try {
-			background = ImageIO.read(getClass().getResourceAsStream("/image/title/wallpaperflare.com_wallpaper.png"));
+			image[0] = ImageIO.read(getClass().getResourceAsStream("/image/title/wallpaperflare.com_wallpaper.png"));
+			image[1] = ImageIO.read(getClass().getResourceAsStream("/image/misc/map.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void draw(Graphics2D g2) {
-		g2.drawImage(background, 0, 0, gp.screenWidth, gp.screenHeight, null);
+	public void draw(Graphics2D g2, int i) {
+		g2.drawImage(image[i], 0, 0, gp.screenWidth, gp.screenHeight, null);
 	}
 }

@@ -14,6 +14,8 @@ public class Player extends Entity {
 	GamePanel gp;
 	KeyHandler keyH;
 	int playerIndex;
+	int x_temp;
+	public boolean changePlayer = false;
 
 	public Player(GamePanel gp, KeyHandler keyH, int playerIndex) {
 		this.gp = gp;
@@ -25,8 +27,9 @@ public class Player extends Entity {
 
 	public void setDefaultValues() {
 		x = 100;
+		x_temp = x;
 		y = 100 + playerIndex*150;
-		speed = 10;
+		speed = 2;
 		direction = "right";
 	}
 
@@ -53,9 +56,19 @@ public class Player extends Entity {
 //			direction = "left";
 //			x -= speed;
 //		}
-		x += speed;
+		
+		if (gp.dice.rolled == true) {
+			x += speed;
+			gp.gameState = gp.pauseState;
+		}
+		if (x >= (x_temp + 150)) { //change here for additional moving mechanism
+			gp.dice.rolled = false;
+			changePlayer = true;
+			gp.gameState = gp.playState;
+			x_temp = x;
+		}
 	}
-
+	
 	public void draw(Graphics2D g2) {
 
 		BufferedImage image = right;

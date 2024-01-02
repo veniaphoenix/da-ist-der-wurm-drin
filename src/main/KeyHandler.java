@@ -67,26 +67,26 @@ public class KeyHandler implements KeyListener {
 						// 2 players
 						gp.gameState = gp.playState;
 						Player newPlayer1 = new Player(gp, gp.keyH, 1);
-            			gp.addPlayer(newPlayer1);						
-						
+						gp.addPlayer(newPlayer1);
+
 					}
 					if (gp.ui.commandNum == 1) {
 						// 3 players
 						gp.gameState = gp.playState;
 						Player newPlayer1 = new Player(gp, gp.keyH, 1);
-            			gp.addPlayer(newPlayer1);	
+						gp.addPlayer(newPlayer1);
 						Player newPlayer2 = new Player(gp, gp.keyH, 2);
-            			gp.addPlayer(newPlayer2);
+						gp.addPlayer(newPlayer2);
 					}
 					if (gp.ui.commandNum == 2) {
 						// 4 players
 						gp.gameState = gp.playState;
 						Player newPlayer1 = new Player(gp, gp.keyH, 1);
-            			gp.addPlayer(newPlayer1);	
+						gp.addPlayer(newPlayer1);
 						Player newPlayer2 = new Player(gp, gp.keyH, 2);
-            			gp.addPlayer(newPlayer2);
+						gp.addPlayer(newPlayer2);
 						Player newPlayer3 = new Player(gp, gp.keyH, 3);
-            			gp.addPlayer(newPlayer3);
+						gp.addPlayer(newPlayer3);
 					}
 					if (gp.ui.commandNum == 3) {
 						// back button
@@ -119,23 +119,24 @@ public class KeyHandler implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		int code = e.getKeyCode();
+		if (gp.gameState == gp.playState) {
+			int code = e.getKeyCode();
 
-		if (code == KeyEvent.VK_W) {
-			upPressed = false;
-		}
-		if (code == KeyEvent.VK_S) {
-			downPressed = false;
-		}
-		if (code == KeyEvent.VK_A) {
-			leftPressed = false;
-		}
-		if (code == KeyEvent.VK_D) {
-			rightPressed = false;
-		}
-		if (code == KeyEvent.VK_SPACE) {
+			if (code == KeyEvent.VK_W) {
+				upPressed = false;
+			}
+			if (code == KeyEvent.VK_S) {
+				downPressed = false;
+			}
+			if (code == KeyEvent.VK_A) {
+				leftPressed = false;
+			}
+			if (code == KeyEvent.VK_D) {
+				rightPressed = false;
+			}
+			if (code == KeyEvent.VK_SPACE) {
 				spacePress = false;
+			}
 		}
 	}
-
 }
