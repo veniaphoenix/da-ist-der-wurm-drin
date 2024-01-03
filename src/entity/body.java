@@ -13,12 +13,13 @@ public class body extends Entity {
 
   GamePanel gp;
   int bodyLength;
-  int x_temp;
+  int x_temp, firstmove;
   public int belong;
   public boolean isNew = true;
   public boolean toRemove = false;
 
   public body(GamePanel gp, int bodyLength, int playerIndex) {
+    super(gp);
     this.gp = gp;
     this.bodyLength = bodyLength;
     speed = 2;

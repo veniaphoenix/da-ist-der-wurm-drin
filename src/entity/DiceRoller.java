@@ -9,7 +9,6 @@ import main.KeyHandler;
 
 public class DiceRoller extends Entity {
 
-	GamePanel gp;
 	KeyHandler keyH;
 
 	public int face;
@@ -23,7 +22,7 @@ public class DiceRoller extends Entity {
 	public boolean rollingFinished = true;
 
 	public DiceRoller(GamePanel gp, KeyHandler keyH) {
-		this.gp = gp;
+		super(gp);
 		this.keyH = keyH;
 		face = 1;
 		loadImage();

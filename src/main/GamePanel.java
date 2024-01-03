@@ -41,6 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int titleState = 0;
 	public final int playState = 1;
 	public final int pauseState = 2;
+	public final int inventoryState = 3;
 	Thread gameThread;
 
 	public GamePanel() {
@@ -156,7 +157,7 @@ public class GamePanel extends JPanel implements Runnable {
 			background.draw(g2, titleState);
 			ui.draw(g2);
 
-		} else if (gameState == playState || gameState == pauseState) {
+		} else {
 			background.draw(g2, playState);
 			dice.draw(g2, 100, 750);
 			for (Player player : players) {
@@ -166,6 +167,7 @@ public class GamePanel extends JPanel implements Runnable {
 				bodypart.draw(g2);
 
 			}
+			ui.draw(g2);
 		}
 
 		g2.dispose();

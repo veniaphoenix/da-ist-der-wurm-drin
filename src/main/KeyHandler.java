@@ -95,26 +95,32 @@ public class KeyHandler implements KeyListener {
 					}
 				}
 			}
-		}
-		if (gp.gameState == gp.playState) {
-
-			if (code == KeyEvent.VK_W) {
-				upPressed = true;
-			}
-			if (code == KeyEvent.VK_S) {
-				downPressed = true;
-			}
-			if (code == KeyEvent.VK_A) {
-				leftPressed = true;
-			}
-			if (code == KeyEvent.VK_D) {
-				rightPressed = true;
-			}
+		} else if (gp.gameState == gp.playState) {
 			if (code == KeyEvent.VK_SPACE) {
 				spacePress = true;
 			}
+			if (code == KeyEvent.VK_I) {
+				gp.gameState = gp.inventoryState;
+			}
+		} else if (gp.gameState == gp.inventoryState) {
+			if (code == KeyEvent.VK_I) {
+				gp.gameState = gp.playState;
+			}
+			if (code == KeyEvent.VK_LEFT) {
+				gp.playSE(1);
+				gp.ui.slotCol--;
+				if (gp.ui.slotCol < 0) {
+					gp.ui.slotCol = 1;
+				}
+			}
+			if (code == KeyEvent.VK_RIGHT) {
+				gp.playSE(1);
+				gp.ui.slotCol++;
+				if (gp.ui.slotCol > 1) {
+					gp.ui.slotCol = 0;
+				}
+			}
 		}
-
 	}
 
 	@Override
