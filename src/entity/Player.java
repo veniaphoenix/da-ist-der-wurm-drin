@@ -3,6 +3,7 @@ package entity;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -11,18 +12,22 @@ import main.KeyHandler;
 
 public class Player extends Entity {
 
-	GamePanel gp;
 	KeyHandler keyH;
 	int playerIndex;
 	int x_temp;
 	public boolean changePlayer = false;
-
+	public ArrayList<Entity> inventoryList = new ArrayList<>();
+	String color = "white";
+	OBJ_Daisy daisy;
+	OBJ_Berry berry;
+	
 	public Player(GamePanel gp, KeyHandler keyH, int playerIndex) {
-		this.gp = gp;
+		super(gp);
 		this.keyH = keyH;
 		this.playerIndex = playerIndex;
 		setDefaultValues();
 		getPlayerImage();
+		setInventory();
 	}
 
 	public void setDefaultValues() {
@@ -31,6 +36,20 @@ public class Player extends Entity {
 		y = 100 + playerIndex*150;
 		speed = 2;
 		direction = "right";
+		if (playerIndex == 0) {
+			color = "white";
+		}
+		else if (playerIndex == 1) {
+			color = "blue";
+		}
+		else if (playerIndex == 2) {
+			color = "orange";
+		}
+		else if (playerIndex == 3) {
+			color = "red";
+		}
+		daisy = new OBJ_Daisy(gp, color);
+		berry = new OBJ_Berry(gp, color);
 	}
 
 	public void getPlayerImage() {
@@ -42,6 +61,11 @@ public class Player extends Entity {
 		}
 	}
 
+	public void setInventory() {
+		inventoryList.add(daisy);
+		inventoryList.add(berry);
+	}
+	
 	public void update() {
 //		if (keyH.upPressed == true) {
 //			direction = "up";

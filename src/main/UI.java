@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -20,7 +21,10 @@ public class UI {
 	int numberOfPlayer = 2;
 	float image_scale = 3 / 4;
 	public int titleScreenState = 0;
-
+	public String textInventory = "Choose item";
+	int slotRow = 0;
+	int slotCol = 0;
+	
 	public UI(GamePanel gp) {
 		this.gp = gp;
 
@@ -47,18 +51,60 @@ public class UI {
 		}
 
 		if (gp.gameState == gp.playState) {
-			drawGameScreen();
-			// for (int i = 0; i < numberOfPlayer; i++) {
-            // 	Player newPlayer = new Player(gp, gp.keyH, i);
-            // 	gp.addPlayer(newPlayer);
-        	// }
+		}
+		if (gp.gameState == gp.inventoryState) {
+			drawInventory();
 		}
 	}
 
 	public void drawGameScreen() {
 		// g2.drawImage(diceImage, getXForCenteredText(""), 750, 96, 96, null);
 	}
+	public void drawInventory() {
+		int frameX = gp.gridSize * 20;
+		int frameY = (int) (gp.gridSize * 0.5);
+		int frameWidth = gp.gridSize * 3;
+		int frameHeight = gp.gridSize * 2;
+		drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
+		// SLOT
+		final int slotXStart = frameX + gp.gridSize / 2;
+		final int slotYStart = frameY + (int) (gp.gridSize * 0.7);
+		int slotX = slotXStart;
+		int slotY = slotYStart;
+
+		// CURSOR
+		int cursorX = slotXStart + (gp.gridSize * slotCol);
+		int cursorY = slotYStart + (gp.gridSize * slotRow);
+		int cursorWidth = gp.gridSize;
+		int cursorheight = gp.gridSize;
+		
+		for (int j = 0; j < 2; j++) {
+			g2.drawImage(gp.players.get(gp.currentPlayerIndex).inventoryList.get(j).down, slotX, slotY,
+					gp.gridSize, gp.gridSize, null);
+			slotX += gp.gridSize;
+		}
+		
+		g2.setColor(Color.white);
+		g2.setStroke(new BasicStroke(3));
+		g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorheight, 10, 10);
+	}
+	public void drawSubWindow(int x, int y, int width, int height) { // Inventory window
+		Color c = new Color(0, 0, 0, 210);
+		g2.setColor(c);
+		g2.fillRoundRect(x, y, width, height, 35, 35);
+		c = new Color(255, 255, 255);
+		g2.setColor(c);
+		g2.setStroke(new BasicStroke(5));
+		g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25);
+		g2.setFont(pixelFont);
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20F));
+		x = 1400 + getXForCenteredTextSubWindow(textInventory);
+		y += gp.gridSize * 0.5;
+		g2.drawString(textInventory, x, y);
+
+	}
+	
 	public void drawTitleScreen() {
 		if (titleScreenState == 0) {
 			g2.setFont(CHLORINR);
@@ -226,13 +272,17 @@ public class UI {
 			}
 		}
 	}
-
+	
 	public int getXForCenteredText(String text) {
 		int length = g2.getFontMetrics().stringWidth(text);
 		int x = (gp.screenWidth - length) / 2;
 		return x;
 	}
-
+	public int getXForCenteredTextSubWindow(String text) {
+		int length = g2.getFontMetrics().stringWidth(text);
+		int x = (210 - length) / 2;
+		return x;
+	}
 	public void drawBorder(String text, int x, int y) {
 		g2.setColor(Color.black);
 		g2.drawString(text, x - 2, y - 2);
