@@ -48,15 +48,12 @@ public class UI {
 
 		if (gp.gameState == gp.playState) {
 			drawGameScreen();
-			// for (int i = 0; i < numberOfPlayer; i++) {
-            // 	Player newPlayer = new Player(gp, gp.keyH, i);
-            // 	gp.addPlayer(newPlayer);
-        	// }
+
 		}
 	}
 
 	public void drawGameScreen() {
-		// g2.drawImage(diceImage, getXForCenteredText(""), 750, 96, 96, null);
+
 	}
 
 	public void drawTitleScreen() {

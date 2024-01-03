@@ -3,6 +3,8 @@ package entity;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -15,17 +17,24 @@ public class Player extends Entity {
 	KeyHandler keyH;
 	int playerIndex;
 	int x_temp;
+	int firstmove;
 	public boolean changePlayer = false;
+	public boolean added;
+	public boolean isMoving = false;
+	
+	Graphics2D g;
 
 	public Player(GamePanel gp, KeyHandler keyH, int playerIndex) {
 		this.gp = gp;
 		this.keyH = keyH;
 		this.playerIndex = playerIndex;
+		this.firstmove = 80;
 		setDefaultValues();
 		getPlayerImage();
 	}
 
 	public void setDefaultValues() {
+		added = true;
 		x = 100;
 		x_temp = x;
 		y = 100 + playerIndex*150;
@@ -56,17 +65,34 @@ public class Player extends Entity {
 //			direction = "left";
 //			x -= speed;
 //		}
-		
-		if (gp.dice.rolled == true) {
+		if(gp.dice.rollingFinished){
+			if (gp.dice.rolled == true) {
 			x += speed;
+			isMoving = true;
 			gp.gameState = gp.pauseState;
 		}
-		if (x >= (x_temp + 150)) { //change here for additional moving mechanism
-			gp.dice.rolled = false;
+		if (x >= (x_temp + gp.dice.getFace() * 26 + firstmove)) { //change here for additional moving mechanism
+			added = false;
+			firstmove = 0;
 			changePlayer = true;
 			gp.gameState = gp.playState;
 			x_temp = x;
+			gp.dice.rolled = false;
 		}
+		}
+		// if (gp.dice.rolled == true) {
+		// 	x += speed;
+		// 	isMoving = true;
+		// 	gp.gameState = gp.pauseState;
+		// }
+		// if (x >= (x_temp + gp.dice.getFace() * 26 + firstmove)) { //change here for additional moving mechanism
+		// 	added = false;
+		// 	firstmove = 0;
+		// 	changePlayer = true;
+		// 	gp.gameState = gp.playState;
+		// 	x_temp = x;
+		// 	gp.dice.rolled = false;
+		// }
 	}
 	
 	public void draw(Graphics2D g2) {

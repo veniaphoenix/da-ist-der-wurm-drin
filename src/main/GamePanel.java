@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -13,6 +14,7 @@ import javax.swing.JPanel;
 import background.Background;
 import entity.DiceRoller;
 import entity.Player;
+import entity.body;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -25,8 +27,8 @@ public class GamePanel extends JPanel implements Runnable {
 	int FPS = 60;
 
 	KeyHandler keyH = new KeyHandler(this);
-	// Player player = new Player(this, keyH);
-	List<Player> players = new ArrayList<>();
+	public List<Player> players = new ArrayList<>();
+	List<body> bodyparts = new ArrayList<>();
 
 	int currentPlayerIndex = 0;
 
@@ -40,7 +42,6 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int playState = 1;
 	public final int pauseState = 2;
 	Thread gameThread;
-
 
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -56,7 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void setupGame() {
-//		playMusic(0);
+		// playMusic(0);
 		gameState = titleState;
 	}
 
@@ -90,18 +91,53 @@ public class GamePanel extends JPanel implements Runnable {
 	public void addPlayer(Player player) {
 		players.add(player);
 	}
-            
+
 	public void nextPlayer() {
 		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 	}
 
 	public void update() {
+
 		Player currentPlayer = players.get(currentPlayerIndex);
 		dice.update();
 		currentPlayer.update();
-		if (ConditionToChangePlayer()) {
+		// List<body> newBodyParts = new ArrayList<>();
+
+		// Update existing body parts and identify new ones
+		Iterator<body> iterator = bodyparts.iterator();
+		while (iterator.hasNext()) {
+			body bodypart = iterator.next();
+			if (bodypart.belong == currentPlayerIndex) {
+				bodypart.update();
+			}
+		}
+
+		if (ConditionToChangePlayer() && !currentPlayer.added) {
+			body newPart = new body(this, dice.getFace(), currentPlayerIndex);
+			bodyparts.add(newPart);
+			currentPlayer.added = true;
+		} else if (ConditionToChangePlayer()) {
+			currentPlayer.changePlayer = false;
+			currentPlayer.isMoving = false;
 			nextPlayer();
 		}
+
+		// for (body bodypart : bodyparts) {
+		// if(bodypart.belong == currentPlayerIndex){
+		// bodypart.update();
+		// }
+		// }
+
+		// if (ConditionToChangePlayer()) {
+		// if(!currentPlayer.added) {
+		// body newPart = new body(this, dice.getFace(), currentPlayerIndex);
+		// bodyparts.add(newPart);
+		// }
+		// else{
+		// currentPlayer.changePlayer = false;
+		// nextPlayer();
+		// }
+		// }
 	}
 
 	public boolean ConditionToChangePlayer() {
@@ -125,6 +161,10 @@ public class GamePanel extends JPanel implements Runnable {
 			dice.draw(g2, 100, 750);
 			for (Player player : players) {
 				player.draw(g2);
+			}
+			for (body bodypart : bodyparts) {
+				bodypart.draw(g2);
+
 			}
 		}
 

@@ -20,6 +20,7 @@ public class DiceRoller extends Entity {
 	public static final int ROLL_SPEED = 2;
 	public static final int TOTAL_FRAMES = 180;
 	long StartTime, EndTime;
+	public boolean rollingFinished = true;
 
 	public DiceRoller(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
@@ -41,33 +42,7 @@ public class DiceRoller extends Entity {
 	}
 
 	public void roll() {
-		// if (!isRolling) {
-		// isRolling = true;
-		// animationCounter = 0;
-		// }
-
-		// if (animationCounter < 30) {
-		// face = (int) (Math.random() * 6) + 1;
-		// loadImage();
-		// animationCounter++;
-		// roll();
-		// } else {
-		// isRolling = false;
-		// }
-
-		// if (!isRolling) {
-		// isRolling = true;
-		// animationCounter = 0;
-		// }
-
-		// while (animationCounter < TOTAL_FRAMES) {
-		// if (animationCounter % ROLL_SPEED == 0) {
-		// face = (int) (Math.random() * 6) + 1;
-		// loadImage();
-		// }
-		// animationCounter++;
-		// }
-		// isRolling = false;
+		rollingFinished = false;
 		Thread rollThread = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -94,12 +69,14 @@ public class DiceRoller extends Entity {
 		});
 		rollThread.start();
 //		rolled = false;
+		// rollingFinished = true;
 	}
 
 	public void update() {
 		if (keyH.spacePress == true) {
 			StartTime = System.currentTimeMillis();
 			roll();
+			rollingFinished = true;
 		}
 	}
 
@@ -107,9 +84,6 @@ public class DiceRoller extends Entity {
 		return face;
 	}
 
-	public boolean isRolling() {
-		return isRolling;
-	}
 
 	public void draw(Graphics g, int x, int y) {
 		g.drawImage(diceImage, x, y, 100, 100, null);
