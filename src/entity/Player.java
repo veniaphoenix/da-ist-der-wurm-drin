@@ -42,7 +42,7 @@ public class Player extends Entity {
 		added = true;
 		x = 100;
 		x_temp = x;
-		y = 100 + playerIndex*150;
+		y = 100 + playerIndex*215;
 		speed = 2;
 		direction = "right";
 		if (playerIndex == 0) {
