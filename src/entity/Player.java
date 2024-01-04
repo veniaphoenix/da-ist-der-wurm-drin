@@ -102,7 +102,8 @@ public class Player extends Entity {
 			gp.gameState = gp.playState;
 			x_temp = x;
 			gp.dice.rolled = false;
-		}
+			// System.out.println(gp.dice.getFace());
+			}
 		}
 		// if (gp.dice.rolled == true) {
 		// 	x += speed;

@@ -16,7 +16,7 @@ public class UI {
 	GamePanel gp;
 	Graphics2D g2;
 	Font CHLORINR, pixelFont;
-	public BufferedImage image, text, diceImage;
+	public BufferedImage image, text, diceImage, daisyImage, strawImage, finishImage;
 	int commandNum = 0;
 	int numberOfPlayer = 2;
 	float image_scale = 3 / 4;
@@ -50,7 +50,8 @@ public class UI {
 			drawTitleScreen();
 		}
 
-		if (gp.gameState == gp.playState) {
+		if (gp.gameState == gp.playState || gp.gameState == gp.pauseState) {
+			drawGameScreen();
 		}
 		if (gp.gameState == gp.inventoryState) {
 			drawInventory();
@@ -58,8 +59,14 @@ public class UI {
 	}
 
 	public void drawGameScreen() {
-
+		int pos = (int)(gp.gridSize*2.5);
+		g2.drawImage(daisyImage, pos, 0, gp.screenWidth/5 - 15, gp.screenHeight, null);
+		pos += gp.screenWidth/15 + gp.screenWidth/5 - 15;
+		g2.drawImage(strawImage, pos, 0, (int)(gp.screenWidth * 0.15), gp.screenHeight, null);
+		pos += gp.screenWidth/15 + (int)(gp.screenWidth * 0.15);
+		g2.drawImage(finishImage, pos, 0, gp.screenWidth/4, gp.screenHeight, null);
 	}
+
 	public void drawInventory() {
 		int frameX = gp.gridSize * 20;
 		int frameY = (int) (gp.gridSize * 0.5);
@@ -299,6 +306,9 @@ public class UI {
 	public void getImage() {
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/image/title/logo.png"));
+			daisyImage = ImageIO.read(getClass().getResourceAsStream("/image/misc/map_daisy.png"));
+			strawImage = ImageIO.read(getClass().getResourceAsStream("/image/misc/map_straw.png"));
+			finishImage = ImageIO.read(getClass().getResourceAsStream("/image/misc/map_end.png"));
 			text = ImageIO.read(getClass().getResourceAsStream("/image/title/text.png"));
 
 		} catch (IOException e) {

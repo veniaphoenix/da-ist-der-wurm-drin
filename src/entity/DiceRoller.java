@@ -32,12 +32,16 @@ public class DiceRoller extends Entity {
 	}
 
 	private void loadImage() {
+		gp.removeAll();
+		gp.revalidate();
 		try {
 			diceImage = ImageIO.read(getClass().getResourceAsStream("/image/dice/dice" + face + ".png"));
-
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		gp.revalidate();
+		gp.repaint();
 	}
 
 	public void roll() {
@@ -47,16 +51,18 @@ public class DiceRoller extends Entity {
 			public void run() {
 				long endTime = System.currentTimeMillis();
 				try {
-					while ((endTime - StartTime) / 1000F < 3) {
+					while ((endTime - StartTime) / 100F < 3) {
 						// roll dice
 						face = (int) (Math.random() * 6) + 1;
-
+						// System.out.println(face);
 						// update dice images
 						loadImage();
 
+						gp.repaint();
+						gp.revalidate();
 						// sleep thread
 						Thread.sleep(60);
-
+						
 						endTime = System.currentTimeMillis();
 					}
 					rolled = true;

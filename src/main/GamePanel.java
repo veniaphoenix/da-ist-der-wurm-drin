@@ -139,6 +139,8 @@ public class GamePanel extends JPanel implements Runnable {
 		// nextPlayer();
 		// }
 		// }
+		// repaint();
+		// revalidate();
 	}
 
 	public boolean ConditionToChangePlayer() {
@@ -159,7 +161,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 		} else {
 			background.draw(g2, playState);
-			dice.draw(g2, 100, 750);
+			dice.draw(g2, 1565, 780);
 			for (Player player : players) {
 				player.draw(g2);
 			}
