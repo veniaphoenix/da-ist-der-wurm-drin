@@ -70,12 +70,12 @@ public class UI {
 	}
 
 	public void drawGameScreen() {
-		// int pos = (int) (gp.gridSize * 2.5);
-		// g2.drawImage(daisyImage, pos, 0, gp.screenWidth / 5 - 15, gp.screenHeight, null);
-		// pos += gp.screenWidth / 15 + gp.screenWidth / 5 - 15;
-		// g2.drawImage(strawImage, pos, 0, (int) (gp.screenWidth * 0.15), gp.screenHeight, null);
-		// pos += gp.screenWidth / 15 + (int) (gp.screenWidth * 0.15);
-		// g2.drawImage(finishImage, pos, 0, gp.screenWidth / 4, gp.screenHeight, null);
+		int pos = (int) (gp.gridSize * 2.5);
+		g2.drawImage(daisyImage, pos, 0, gp.screenWidth / 5 - 15, gp.screenHeight, null);
+		pos += gp.screenWidth / 15 + gp.screenWidth / 5 - 15;
+		g2.drawImage(strawImage, pos, 0, (int) (gp.screenWidth * 0.15), gp.screenHeight, null);
+		pos += gp.screenWidth / 15 + (int) (gp.screenWidth * 0.15);
+		g2.drawImage(finishImage, pos, 0, gp.screenWidth / 4, gp.screenHeight, null);
 	}
 
 	public void drawInventory() {
