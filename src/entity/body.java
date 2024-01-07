@@ -22,11 +22,15 @@ public class body extends Entity {
     super(gp);
     this.gp = gp;
     this.bodyLength = bodyLength;
+    this.belong = playerIndex;
+    setDefaultValues();
+    getImage();
+  }
+
+  public void setDefaultValues(){
     speed = 2;
     x = 180;
     x_temp = x;
-    this.belong = playerIndex;
-    getImage();
   }
 
   public void update() {
@@ -42,9 +46,8 @@ public class body extends Entity {
 		// 	// gp.dice.rolled = false;
 		// }
     if(gp.players.get(belong).isMoving){
-      x += speed;
+        x += speed;
     }
-
   }
 
 public boolean isNew() {
@@ -73,6 +76,6 @@ public boolean isToRemove() {
   public void draw(Graphics2D g2) {
 
     BufferedImage image = bodyImage;
-    g2.drawImage(image, x, 100 + belong * 150, bodyLength * 26, 80, null);
+    g2.drawImage(image, x, 100 + belong * 215, bodyLength * 26, 80, null);
   }
 }

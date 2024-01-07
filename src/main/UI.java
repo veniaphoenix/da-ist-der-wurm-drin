@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -8,8 +9,12 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 
 import javax.imageio.ImageIO;
+
+import entity.Player;
+import entity.body;
 
 public class UI {
 
@@ -24,7 +29,11 @@ public class UI {
 	public String textInventory = "Choose item";
 	int slotRow = 0;
 	int slotCol = 0;
-	
+
+	public int scencePhase = 0;
+	int counter = 0;
+	float alpha;
+
 	public UI(GamePanel gp) {
 		this.gp = gp;
 
@@ -38,7 +47,6 @@ public class UI {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 
 		getImage();
 	}
@@ -56,15 +64,18 @@ public class UI {
 		if (gp.gameState == gp.inventoryState) {
 			drawInventory();
 		}
+		if (gp.gameState == gp.ending) {
+			drawEnding();
+		}
 	}
 
 	public void drawGameScreen() {
-		int pos = (int)(gp.gridSize*2.5);
-		g2.drawImage(daisyImage, pos, 0, gp.screenWidth/5 - 15, gp.screenHeight, null);
-		pos += gp.screenWidth/15 + gp.screenWidth/5 - 15;
-		g2.drawImage(strawImage, pos, 0, (int)(gp.screenWidth * 0.15), gp.screenHeight, null);
-		pos += gp.screenWidth/15 + (int)(gp.screenWidth * 0.15);
-		g2.drawImage(finishImage, pos, 0, gp.screenWidth/4, gp.screenHeight, null);
+		// int pos = (int) (gp.gridSize * 2.5);
+		// g2.drawImage(daisyImage, pos, 0, gp.screenWidth / 5 - 15, gp.screenHeight, null);
+		// pos += gp.screenWidth / 15 + gp.screenWidth / 5 - 15;
+		// g2.drawImage(strawImage, pos, 0, (int) (gp.screenWidth * 0.15), gp.screenHeight, null);
+		// pos += gp.screenWidth / 15 + (int) (gp.screenWidth * 0.15);
+		// g2.drawImage(finishImage, pos, 0, gp.screenWidth / 4, gp.screenHeight, null);
 	}
 
 	public void drawInventory() {
@@ -85,17 +96,18 @@ public class UI {
 		int cursorY = slotYStart + (gp.gridSize * slotRow);
 		int cursorWidth = gp.gridSize;
 		int cursorheight = gp.gridSize;
-		
+
 		for (int j = 0; j < 2; j++) {
 			g2.drawImage(gp.players.get(gp.currentPlayerIndex).inventoryList.get(j).down, slotX, slotY,
 					gp.gridSize, gp.gridSize, null);
 			slotX += gp.gridSize;
 		}
-		
+
 		g2.setColor(Color.white);
 		g2.setStroke(new BasicStroke(3));
 		g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorheight, 10, 10);
 	}
+
 	public void drawSubWindow(int x, int y, int width, int height) { // Inventory window
 		Color c = new Color(0, 0, 0, 210);
 		g2.setColor(c);
@@ -111,7 +123,7 @@ public class UI {
 		g2.drawString(textInventory, x, y);
 
 	}
-	
+
 	public void drawTitleScreen() {
 		if (titleScreenState == 0) {
 			g2.setFont(CHLORINR);
@@ -184,7 +196,7 @@ public class UI {
 				g2.setColor(Color.yellow);
 				g2.drawString("◄", x + length + gp.gridSize / 2, y);
 			}
-		} else { 			//choose number of players
+		} else { // choose number of players
 			g2.setFont(CHLORINR);
 			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
 
@@ -219,7 +231,7 @@ public class UI {
 				drawBorder("◄", x + length + gp.gridSize / 2, y);
 				g2.setColor(Color.yellow);
 				g2.drawString("◄", x + length + gp.gridSize / 2, y);
-				
+
 			}
 
 			text = "3 Players";
@@ -259,7 +271,7 @@ public class UI {
 				g2.drawString("◄", x + length + gp.gridSize / 2, y);
 
 			}
-			
+
 			text = "Back";
 			x = getXForCenteredText(text);
 			y += gp.gridSize * 1.5;
@@ -279,17 +291,136 @@ public class UI {
 			}
 		}
 	}
-	
+
+	public void drawEnding() { // can insert additional step before this step
+		// if(scencePhase == -1) {
+
+		// }
+		if (scencePhase == 0) {	
+			// can insert winning music here
+
+			gp.background.draw(g2, gp.playState);
+			gp.dice.draw(g2, 1565, 780);
+			for (Player player : gp.players) {
+				player.draw(g2);
+			}
+			for (body bodypart : gp.bodyparts) {
+				bodypart.draw(g2);
+
+			}
+			if (counterReached(300)) {
+				scencePhase++;
+			}
+		}
+
+		if (scencePhase == 1) {
+			alpha += 0.005f;
+			if (alpha > 1)
+				alpha = 1;
+			drawBlackBackground(alpha);
+			if (alpha == 1) {
+				alpha = 0;
+				scencePhase++;
+			}
+		}
+		if (scencePhase == 2) {
+			drawBlackBackground(1f);
+			alpha += 0.005f;
+			if (alpha > 1)
+				alpha = 1;
+
+			String text = "Player " + gp.getWinner() + " win\n"
+					+ "Player " + gp.getWinner()  + " prove that he has the biggest worm among other players\n";
+
+			drawString(alpha, 50f, 200, text, 70);
+
+			if (counterReached(600)) {
+				scencePhase++;
+			}
+		}
+
+		if (scencePhase == 3) {
+			drawBlackBackground(1f);
+			drawString(1f, 150f, gp.screenHeight / 2, "Da ist\nDer Wurm Drin", 130);
+			if (counterReached(480)) {
+				scencePhase++;
+			}
+		}
+
+		if (scencePhase == 4) {
+			drawBlackBackground(1f);
+			String text = "Credits\n"; // add credits here
+
+			drawString(1f, 150f, gp.screenHeight / 3, text, 130);
+			if (counterReached(480)) {
+				scencePhase++;
+			}
+		}
+
+		if (scencePhase == 5) {
+			drawBlackBackground(1f);
+			String text = "Special thank to\nRyiSnow\nfor amazing tutorial";
+
+			drawString(1f, 150f, gp.screenHeight / 3, text, 120);
+			if (counterReached(480)) {
+				scencePhase++;
+			}
+		}
+
+		if (scencePhase == 6) {
+			// while (gp.players.size() > 1) {
+			// gp.players = Collections.singletonList(gp.players.get(0));
+			// }
+			// gp.bodyparts.clear();
+			scencePhase = 0;
+			gp.retry();
+			gp.gameState = gp.titleState;
+		}
+	}
+
+	public boolean counterReached(int target) {
+		boolean counterReached = false;
+		counter++;
+		if (counter > target) {
+			counterReached = true;
+			counter = 0;
+		}
+		return counterReached;
+	}
+
+	public void drawBlackBackground(float alpha) {
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+		g2.setColor(Color.black);
+		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+	}
+
+	public void drawString(float alpha, float fontSize, int y, String text, int lineHeight) {
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+		g2.setColor(Color.white);
+		g2.setFont(g2.getFont().deriveFont(fontSize));
+
+		for (String line : text.split("\n")) {
+			int x = getXForCenteredText(line);
+			g2.drawString(line, x, y);
+			y += lineHeight;
+		}
+
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+	}
+
 	public int getXForCenteredText(String text) {
 		int length = g2.getFontMetrics().stringWidth(text);
 		int x = (gp.screenWidth - length) / 2;
 		return x;
 	}
+
 	public int getXForCenteredTextSubWindow(String text) {
 		int length = g2.getFontMetrics().stringWidth(text);
 		int x = (210 - length) / 2;
 		return x;
 	}
+
 	public void drawBorder(String text, int x, int y) {
 		g2.setColor(Color.black);
 		g2.drawString(text, x - 2, y - 2);

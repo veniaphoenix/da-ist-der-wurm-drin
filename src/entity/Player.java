@@ -14,20 +14,22 @@ import main.KeyHandler;
 public class Player extends Entity {
 
 	KeyHandler keyH;
-	int playerIndex;
-	int x_temp;
+	public int x_temp;
 	int firstmove;
-	public boolean changePlayer = false;
+
+	public int playerIndex;
+	public boolean win;
+	public boolean changePlayer;
 	public boolean added;
-	public boolean isMoving = false;
-	
+	public boolean isMoving;
+
 	Graphics2D g;
 
 	public ArrayList<Entity> inventoryList = new ArrayList<>();
 	String color = "white";
 	OBJ_Daisy daisy;
 	OBJ_Berry berry;
-	
+
 	public Player(GamePanel gp, KeyHandler keyH, int playerIndex) {
 		super(gp);
 		this.keyH = keyH;
@@ -39,22 +41,22 @@ public class Player extends Entity {
 	}
 
 	public void setDefaultValues() {
+		win = false;
+		isMoving = false;
+		changePlayer = false;
 		added = true;
 		x = 100;
 		x_temp = x;
-		y = 100 + playerIndex*215;
+		y = 100 + playerIndex * 215;
 		speed = 2;
 		direction = "right";
 		if (playerIndex == 0) {
 			color = "white";
-		}
-		else if (playerIndex == 1) {
+		} else if (playerIndex == 1) {
 			color = "blue";
-		}
-		else if (playerIndex == 2) {
+		} else if (playerIndex == 2) {
 			color = "orange";
-		}
-		else if (playerIndex == 3) {
+		} else if (playerIndex == 3) {
 			color = "red";
 		}
 		daisy = new OBJ_Daisy(gp, color);
@@ -74,52 +76,44 @@ public class Player extends Entity {
 		inventoryList.add(daisy);
 		inventoryList.add(berry);
 	}
-	
+
 	public void update() {
-//		if (keyH.upPressed == true) {
-//			direction = "up";
-//			y -= speed;
-//		} else if (keyH.downPressed == true) {
-//			direction = "down";
-//			y += speed;
-//		} else if (keyH.rightPressed == true) {
-//			direction = "right";
-//			x += speed;
-//		} else if (keyH.leftPressed == true) {
-//			direction = "left";
-//			x -= speed;
-//		}
-		if(gp.dice.rollingFinished){
+		// if (keyH.upPressed == true) {
+		// direction = "up";
+		// y -= speed;
+		// } else if (keyH.downPressed == true) {
+		// direction = "down";
+		// y += speed;
+		// } else if (keyH.rightPressed == true) {
+		// direction = "right";
+		// x += speed;
+		// } else if (keyH.leftPressed == true) {
+		// direction = "left";
+		// x -= speed;
+		// }
+		if (gp.dice.rollingFinished) {
 			if (gp.dice.rolled == true) {
-			x += speed;
-			isMoving = true;
-			gp.gameState = gp.pauseState;
-		}
-		if (x >= (x_temp + gp.dice.getFace() * 26 + firstmove)) { //change here for additional moving mechanism
-			added = false;
-			firstmove = 0;
-			changePlayer = true;
-			gp.gameState = gp.playState;
-			x_temp = x;
-			gp.dice.rolled = false;
-			// System.out.println(gp.dice.getFace());
+				x += speed;
+				isMoving = true;
+				gp.gameState = gp.pauseState;
+				
+			}
+			if (x >= (x_temp + gp.dice.getFace() * 26 + firstmove)) {
+				added = false;
+				firstmove = 0;
+				changePlayer = true;
+				gp.gameState = gp.playState;
+				x_temp = x;
+				gp.dice.rolled = false;
+				if(x >= gp.screenWidth - gp.screenWidth/5){
+					win = true;
+					gp.gameState = gp.ending;
+					// return;
+				}
 			}
 		}
-		// if (gp.dice.rolled == true) {
-		// 	x += speed;
-		// 	isMoving = true;
-		// 	gp.gameState = gp.pauseState;
-		// }
-		// if (x >= (x_temp + gp.dice.getFace() * 26 + firstmove)) { //change here for additional moving mechanism
-		// 	added = false;
-		// 	firstmove = 0;
-		// 	changePlayer = true;
-		// 	gp.gameState = gp.playState;
-		// 	x_temp = x;
-		// 	gp.dice.rolled = false;
-		// }
 	}
-	
+
 	public void draw(Graphics2D g2) {
 
 		BufferedImage image = right;

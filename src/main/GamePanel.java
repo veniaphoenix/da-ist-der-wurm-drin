@@ -25,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int screenHeight = screenSize.height;
 	public final int gridSize = 70;
 	int FPS = 60;
+	int winner;
 
 	KeyHandler keyH = new KeyHandler(this);
 	public List<Player> players = new ArrayList<>();
@@ -42,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int playState = 1;
 	public final int pauseState = 2;
 	public final int inventoryState = 3;
+	public final int ending = 4;
 	Thread gameThread;
 
 	public GamePanel() {
@@ -53,12 +55,15 @@ public class GamePanel extends JPanel implements Runnable {
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
 
-		Player newPlayer = new Player(this, this.keyH, 0);
-		this.addPlayer(newPlayer);
+		this.winner = 0;
+		// Player newPlayer = new Player(this, this.keyH, 0);
+		// this.addPlayer(newPlayer);
 	}
 
 	public void setupGame() {
 		// playMusic(0);
+		Player newPlayer = new Player(this, this.keyH, 0);
+		this.addPlayer(newPlayer);
 		gameState = titleState;
 	}
 
@@ -98,7 +103,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void update() {
-
+		if(players.isEmpty()) return;
 		Player currentPlayer = players.get(currentPlayerIndex);
 		dice.update();
 		currentPlayer.update();
@@ -143,6 +148,44 @@ public class GamePanel extends JPanel implements Runnable {
 		// revalidate();
 	}
 
+	public void retry() {
+		// players.clear();
+		// bodyparts.clear();
+		// setupGame();
+		if (gameThread != null) {
+			gameThread.interrupt();
+			gameThread = null;
+		}
+	
+		// Clear players and body parts
+		players.clear();
+		bodyparts.clear();
+	
+		// Reset player index and add a new player
+		currentPlayerIndex = 0;
+		Player newPlayer = new Player(this, keyH, 0);
+		addPlayer(newPlayer);
+	
+		// Reset dice and other game-related variables
+		gameState = titleState;
+	
+		// Restart the game thread
+		startGameThread();
+	}
+
+	public int getWinner() {
+		for (Player player : players) {
+			if (player.win == true) {
+				winner = player.playerIndex;
+				// System.out.print(winner);
+				player.win = false;
+				winner++;
+				return winner;
+			}
+		}
+		return winner;
+	}
+
 	public boolean ConditionToChangePlayer() {
 		Player currentPlayer = players.get(currentPlayerIndex);
 		if (currentPlayer.changePlayer == true) {
@@ -159,7 +202,7 @@ public class GamePanel extends JPanel implements Runnable {
 			background.draw(g2, titleState);
 			ui.draw(g2);
 
-		} else {
+		} else if(gameState == playState || gameState == pauseState){
 			background.draw(g2, playState);
 			dice.draw(g2, 1565, 780);
 			for (Player player : players) {
@@ -170,6 +213,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 			}
 			ui.draw(g2);
+		} else {
+			ui.draw(g2);;
 		}
 
 		g2.dispose();
