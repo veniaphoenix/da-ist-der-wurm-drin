@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import background.Background;
 import entity.DiceRoller;
 import entity.Player;
-import entity.body;
+import entity.Body;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	KeyHandler keyH = new KeyHandler(this);
 	public List<Player> players = new ArrayList<>();
-	List<body> bodyparts = new ArrayList<>();
+	List<Body> bodyparts = new ArrayList<>();
 
 	int currentPlayerIndex = 0;
 
@@ -110,16 +110,16 @@ public class GamePanel extends JPanel implements Runnable {
 		// List<body> newBodyParts = new ArrayList<>();
 
 		// Update existing body parts and identify new ones
-		Iterator<body> iterator = bodyparts.iterator();
+		Iterator<Body> iterator = bodyparts.iterator();
 		while (iterator.hasNext()) {
-			body bodypart = iterator.next();
+			Body bodypart = iterator.next();
 			if (bodypart.belong == currentPlayerIndex) {
 				bodypart.update();
 			}
 		}
 
 		if (ConditionToChangePlayer() && !currentPlayer.added) {
-			body newPart = new body(this, dice.getFace(), currentPlayerIndex);
+			Body newPart = new Body(this, dice.getFace(), currentPlayerIndex);
 			bodyparts.add(newPart);
 			currentPlayer.added = true;
 		} else if (ConditionToChangePlayer()) {
@@ -202,13 +202,15 @@ public class GamePanel extends JPanel implements Runnable {
 			background.draw(g2, titleState);
 			ui.draw(g2);
 
-		} else if(gameState == playState || gameState == pauseState){
+		} else if(gameState == playState || 
+				gameState == pauseState || 
+				gameState == inventoryState){
 			background.draw(g2, playState);
 			dice.draw(g2, 1565, 780);
 			for (Player player : players) {
 				player.draw(g2);
 			}
-			for (body bodypart : bodyparts) {
+			for (Body bodypart : bodyparts) {
 				bodypart.draw(g2);
 
 			}

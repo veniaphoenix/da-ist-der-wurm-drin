@@ -9,12 +9,10 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
-
 import javax.imageio.ImageIO;
 
 import entity.Player;
-import entity.body;
+import entity.Body;
 
 public class UI {
 
@@ -304,7 +302,7 @@ public class UI {
 			for (Player player : gp.players) {
 				player.draw(g2);
 			}
-			for (body bodypart : gp.bodyparts) {
+			for (Body bodypart : gp.bodyparts) {
 				bodypart.draw(g2);
 
 			}
