@@ -37,7 +37,7 @@ public class UI {
 
 	public UI(GamePanel gp) {
 		this.gp = gp;
-
+		alpha = 0;
 		try {
 			InputStream is = getClass().getResourceAsStream("/font/Caveman.ttf");
 			CHLORINR = Font.createFont(Font.TRUETYPE_FONT, is);
@@ -166,7 +166,7 @@ public class UI {
 			// new game
 			text = "NEW GAME";
 			x = getXForCenteredText(text);
-			y = (int) (gp.gridSize * 9.3);
+			y = (int) (gp.gridSize * 7.3);
 			drawBorder(text, x, y);
 			g2.setColor(Color.white);
 			g2.drawString(text, x, y);
