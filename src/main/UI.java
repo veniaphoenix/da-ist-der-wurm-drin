@@ -62,7 +62,6 @@ public class UI {
 		if (gp.gameState == gp.playState || gp.gameState == gp.pauseState) {
 			drawGameScreen();
 			drawItem();
-			checkCrossed();
 		}
 		if (gp.gameState == gp.inventoryState) {
 			drawGameScreen();
@@ -509,13 +508,12 @@ public class UI {
 		for (Player player : gp.players) {
 			if(player.x + 80 >= daisyPos && player.x < berryPos) {
 				daisyCrossed = true;
-				break;
 			}
 			else if (player.x + 80 >= berryPos) {
 				berryCrossed = true;
-				break;
 			}
 		}
+		System.out.println(daisyCrossed + " " + berryCrossed);
 	}
 	public int getXForCenteredText(String text) {
 		int length = g2.getFontMetrics().stringWidth(text);
