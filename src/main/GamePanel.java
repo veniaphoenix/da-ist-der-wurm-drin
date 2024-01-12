@@ -129,12 +129,6 @@ public class GamePanel extends JPanel implements Runnable {
 			nextPlayer();
 		}
 
-		// for (body bodypart : bodyparts) {
-		// if(bodypart.belong == currentPlayerIndex){
-		// bodypart.update();
-		// }
-		// }
-
 		// if (ConditionToChangePlayer()) {
 		// if(!currentPlayer.added) {
 		// body newPart = new body(this, dice.getFace(), currentPlayerIndex);
@@ -150,9 +144,6 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void retry() {
-		// players.clear();
-		// bodyparts.clear();
-		// setupGame();
 		if (gameThread != null) {
 			gameThread.interrupt();
 			gameThread = null;
