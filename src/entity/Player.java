@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
@@ -20,11 +21,18 @@ public class Player extends Entity {
 	public boolean changePlayer;
 	public boolean added;
 	public boolean isMoving;
+	public boolean useStrawberry = false;
+	public boolean useDaisy = false;
+	public int yPlayerUsedItemOn;
+	public int indexDaisyPlayerUsed = 0;
+	public int indexBerryPlayerUsed = 0;
+	public int daisyCounter = 0;
+	public int berryCounter = 0;
 
 	Graphics2D g;
 
 	public ArrayList<Entity> inventoryList = new ArrayList<>();
-	String color = "white";
+	public String color = "white";
 	OBJ_Daisy daisy;
 	OBJ_Berry berry;
 
@@ -76,25 +84,12 @@ public class Player extends Entity {
 	}
 
 	public void update() {
-		// if (keyH.upPressed == true) {
-		// direction = "up";
-		// y -= speed;
-		// } else if (keyH.downPressed == true) {
-		// direction = "down";
-		// y += speed;
-		// } else if (keyH.rightPressed == true) {
-		// direction = "right";
-		// x += speed;
-		// } else if (keyH.leftPressed == true) {
-		// direction = "left";
-		// x -= speed;
-		// }
 		if (gp.dice.rollingFinished) {
 			if (gp.dice.rolled == true) {
 				x += speed;
 				isMoving = true;
 				gp.gameState = gp.pauseState;
-				
+
 			}
 			if (x >= (x_temp + gp.dice.getFace() * 26 + firstmove)) {
 				added = false;
@@ -103,7 +98,7 @@ public class Player extends Entity {
 				gp.gameState = gp.playState;
 				x_temp = x;
 				gp.dice.rolled = false;
-				if(x >= gp.screenWidth - gp.screenWidth/5){
+				if (x >= gp.screenWidth - gp.screenWidth / 5) {
 					win = true;
 					gp.gameState = gp.ending;
 					// return;

@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 
 public class OBJ_Daisy extends Entity {
-//	GamePanel gp;
+	public boolean used = false;
 	public OBJ_Daisy(GamePanel gp, String color) {
 		super(gp);
 		loadImage(color);

@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 
 public class OBJ_Berry extends Entity {
-//	GamePanel gp;
+	public boolean used = false;
 	public OBJ_Berry(GamePanel gp, String color) {
 		super(gp);
 		loadImage(color);

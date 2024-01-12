@@ -44,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int pauseState = 2;
 	public final int inventoryState = 3;
 	public final int ending = 4;
+	public final int optionState = 5;
 	Thread gameThread;
 
 	public GamePanel() {
@@ -204,7 +205,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 		} else if(gameState == playState || 
 				gameState == pauseState || 
-				gameState == inventoryState){
+				gameState == inventoryState ||
+				gameState == optionState){
 			background.draw(g2, playState);
 			dice.draw(g2, 1565, 780);
 			for (Player player : players) {

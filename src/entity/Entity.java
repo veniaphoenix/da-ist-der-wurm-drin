@@ -12,6 +12,8 @@ public class Entity {
 	public BufferedImage up, down, left, right, diceImage, bodyImage;
 	public String direction;
 	GamePanel gp;
+	public int itemIndex;
+	public boolean used;
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 	}

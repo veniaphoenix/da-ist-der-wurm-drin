@@ -40,6 +40,7 @@ public class KeyHandler implements KeyListener {
 				if (code == KeyEvent.VK_ENTER) {
 					if (gp.ui.commandNum == 0) {
 						gp.ui.titleScreenState = 1;
+						gp.ui.commandNum = 0;
 
 					}
 					if (gp.ui.commandNum == 1) {
@@ -66,27 +67,33 @@ public class KeyHandler implements KeyListener {
 					if (gp.ui.commandNum == 0) {
 						// 2 players
 						gp.gameState = gp.playState;
+						gp.ui.commandNum = 0;
 						Player newPlayer1 = new Player(gp, gp.keyH, 1);
 						gp.addPlayer(newPlayer1);
+						gp.ui.numberOfPlayer = 2;
 
 					}
 					if (gp.ui.commandNum == 1) {
 						// 3 players
 						gp.gameState = gp.playState;
+						gp.ui.commandNum = 0;
 						Player newPlayer1 = new Player(gp, gp.keyH, 1);
 						gp.addPlayer(newPlayer1);
 						Player newPlayer2 = new Player(gp, gp.keyH, 2);
 						gp.addPlayer(newPlayer2);
+						gp.ui.numberOfPlayer = 3;
 					}
 					if (gp.ui.commandNum == 2) {
 						// 4 players
 						gp.gameState = gp.playState;
+						gp.ui.commandNum = 0;
 						Player newPlayer1 = new Player(gp, gp.keyH, 1);
 						gp.addPlayer(newPlayer1);
 						Player newPlayer2 = new Player(gp, gp.keyH, 2);
 						gp.addPlayer(newPlayer2);
 						Player newPlayer3 = new Player(gp, gp.keyH, 3);
 						gp.addPlayer(newPlayer3);
+						gp.ui.numberOfPlayer = 4;
 					}
 					if (gp.ui.commandNum == 3) {
 						// back button
@@ -119,6 +126,91 @@ public class KeyHandler implements KeyListener {
 				if (gp.ui.slotCol > 1) {
 					gp.ui.slotCol = 0;
 				}
+			}
+			if (code == KeyEvent.VK_ENTER) {
+				gp.playSE(1);
+				gp.gameState = gp.optionState;
+			}
+		} else if (gp.gameState == gp.optionState) {
+			if (code == KeyEvent.VK_UP) {
+				gp.playSE(1);
+				gp.ui.commandNum--;
+				if (gp.ui.commandNum < 0) {
+					gp.ui.commandNum = gp.ui.numberOfPlayer - 1;
+				}
+			}
+			if (code == KeyEvent.VK_DOWN) {
+				gp.playSE(1);
+				gp.ui.commandNum++;
+				if (gp.ui.commandNum > gp.ui.numberOfPlayer - 1) {
+					gp.ui.commandNum = 0;
+				}
+			}
+			if (code == KeyEvent.VK_ENTER) {
+
+//				if (gp.ui.commandNum == 0) {
+//					gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(0).y;
+//				}
+//				if (gp.ui.commandNum == 1) {
+//					gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(1).y;
+//				}
+//				if (gp.ui.commandNum == 2) {
+//					gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(2).y;
+//				}
+//				if (gp.ui.commandNum == 3) {
+//					gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(3).y;
+//				}
+				gp.gameState = gp.inventoryState;
+				if (gp.ui.slotCol == 0 
+						&& gp.players.get(gp.currentPlayerIndex).inventoryList.get(0).used == false) {
+					gp.players.get(gp.currentPlayerIndex).inventoryList.get(0).used = true;
+					gp.players.get(gp.currentPlayerIndex).useDaisy = true;
+					if (gp.ui.commandNum == 0) {
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(0).y;
+						gp.players.get(0).daisyCounter++;
+						gp.players.get(gp.currentPlayerIndex).indexDaisyPlayerUsed = gp.players.get(0).daisyCounter;
+					}
+					if (gp.ui.commandNum == 1) {
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(1).y;
+						gp.players.get(1).daisyCounter++;
+						gp.players.get(gp.currentPlayerIndex).indexDaisyPlayerUsed = gp.players.get(1).daisyCounter;
+					}
+					if (gp.ui.commandNum == 2) {
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(2).y;
+						gp.players.get(2).daisyCounter++;
+						gp.players.get(gp.currentPlayerIndex).indexDaisyPlayerUsed = gp.players.get(2).daisyCounter;
+					}
+					if (gp.ui.commandNum == 3) {
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(3).y;
+						gp.players.get(3).daisyCounter++;
+						gp.players.get(gp.currentPlayerIndex).indexDaisyPlayerUsed = gp.players.get(3).daisyCounter;
+					}
+				} else if (gp.ui.slotCol == 1
+						&& gp.players.get(gp.currentPlayerIndex).inventoryList.get(1).used == false) {
+					gp.players.get(gp.currentPlayerIndex).inventoryList.get(1).used = true;
+					gp.players.get(gp.currentPlayerIndex).useStrawberry = true;
+					if (gp.ui.commandNum == 0) {
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(0).y;
+						gp.players.get(0).berryCounter++;
+						gp.players.get(gp.currentPlayerIndex).indexBerryPlayerUsed = gp.players.get(0).berryCounter;
+					}
+					if (gp.ui.commandNum == 1) {
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(1).y;
+						gp.players.get(1).berryCounter++;
+						gp.players.get(gp.currentPlayerIndex).indexBerryPlayerUsed = gp.players.get(1).berryCounter;
+					}
+					if (gp.ui.commandNum == 2) {
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(2).y;
+						gp.players.get(2).berryCounter++;
+						gp.players.get(gp.currentPlayerIndex).indexBerryPlayerUsed = gp.players.get(2).berryCounter;
+					}
+					if (gp.ui.commandNum == 3) {
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(3).y;
+						gp.players.get(3).berryCounter++;
+						gp.players.get(gp.currentPlayerIndex).indexBerryPlayerUsed = gp.players.get(3).berryCounter;
+					}
+				}
+					
 			}
 		}
 	}
