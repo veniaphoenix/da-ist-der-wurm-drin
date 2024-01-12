@@ -29,7 +29,8 @@ public class UI {
 	public String textOption = "Which player do you\nexpect to come first?";
 	int slotRow = 0;
 	int slotCol = 0;
-
+	public boolean daisyCrossed = false;
+	public boolean berryCrossed = false;
 	public int scencePhase = 0;
 	int counter = 0;
 	float alpha;
@@ -61,11 +62,13 @@ public class UI {
 		if (gp.gameState == gp.playState || gp.gameState == gp.pauseState) {
 			drawGameScreen();
 			drawItem();
+			checkCrossed();
 		}
 		if (gp.gameState == gp.inventoryState) {
 			drawGameScreen();
 			drawInventory();
 			drawItem();
+			checkCrossed();
 		}
 		if (gp.gameState == gp.ending) {
 			drawEnding();
@@ -85,6 +88,8 @@ public class UI {
 		g2.drawImage(strawImage, pos, 0, (int) (gp.screenWidth * 0.15), gp.screenHeight, null);
 		pos += gp.screenWidth / 15 + (int) (gp.screenWidth * 0.15);
 		g2.drawImage(finishImage, pos, 0, gp.screenWidth / 4, gp.screenHeight, null);
+		g2.fillRect((int)(gp.gridSize * 2.5 + (gp.screenWidth / 5 - 15)), 0, 10, 1050);
+		g2.fillRect((int) (gp.gridSize * 2.5) + gp.screenWidth / 15 + gp.screenWidth / 5 - 15 + (int) (gp.screenWidth * 0.15), 0, 10, 1050);
 	}
 
 	public void drawInventory() {
@@ -498,7 +503,20 @@ public class UI {
 			}
 		}
 	}
-
+	public void checkCrossed() {
+		int daisyPos = (int)(gp.gridSize * 2.5 + (gp.screenWidth / 5 - 15));
+		int berryPos =  (int) (gp.gridSize * 2.5) + gp.screenWidth / 15 + gp.screenWidth / 5 - 15 + (int) (gp.screenWidth * 0.15);
+		for (Player player : gp.players) {
+			if(player.x + 80 >= daisyPos && player.x < berryPos) {
+				daisyCrossed = true;
+				break;
+			}
+			else if (player.x + 80 >= berryPos) {
+				berryCrossed = true;
+				break;
+			}
+		}
+	}
 	public int getXForCenteredText(String text) {
 		int length = g2.getFontMetrics().stringWidth(text);
 		int x = (gp.screenWidth - length) / 2;

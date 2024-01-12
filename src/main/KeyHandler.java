@@ -129,8 +129,14 @@ public class KeyHandler implements KeyListener {
 			}
 			if (code == KeyEvent.VK_ENTER) {
 				gp.playSE(1);
-				gp.gameState = gp.optionState;
+				if (gp.ui.daisyCrossed == false && gp.ui.slotCol == 0 || gp.ui.slotCol == 1) {
+					gp.gameState = gp.optionState;
+				}
+				else if (gp.ui.berryCrossed == false && gp.ui.slotCol == 1) {
+					gp.gameState = gp.optionState;
+				}
 			}
+			
 		} else if (gp.gameState == gp.optionState) {
 			if (code == KeyEvent.VK_UP) {
 				gp.playSE(1);
@@ -147,22 +153,8 @@ public class KeyHandler implements KeyListener {
 				}
 			}
 			if (code == KeyEvent.VK_ENTER) {
-
-//				if (gp.ui.commandNum == 0) {
-//					gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(0).y;
-//				}
-//				if (gp.ui.commandNum == 1) {
-//					gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(1).y;
-//				}
-//				if (gp.ui.commandNum == 2) {
-//					gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(2).y;
-//				}
-//				if (gp.ui.commandNum == 3) {
-//					gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(3).y;
-//				}
 				gp.gameState = gp.inventoryState;
-				if (gp.ui.slotCol == 0 
-						&& gp.players.get(gp.currentPlayerIndex).inventoryList.get(0).used == false) {
+				if (gp.ui.slotCol == 0 && gp.players.get(gp.currentPlayerIndex).inventoryList.get(0).used == false) {
 					gp.players.get(gp.currentPlayerIndex).inventoryList.get(0).used = true;
 					gp.players.get(gp.currentPlayerIndex).useDaisy = true;
 					if (gp.ui.commandNum == 0) {
@@ -210,7 +202,7 @@ public class KeyHandler implements KeyListener {
 						gp.players.get(gp.currentPlayerIndex).indexBerryPlayerUsed = gp.players.get(3).berryCounter;
 					}
 				}
-					
+
 			}
 		}
 	}
