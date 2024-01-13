@@ -23,7 +23,11 @@ public class Player extends Entity {
 	public boolean isMoving;
 	public boolean useStrawberry = false;
 	public boolean useDaisy = false;
-	public int yPlayerUsedItemOn;
+
+	public int bonus;
+
+	public int yPlayerUsedItem_1_On;
+	public int yPlayerUsedItem_2_On;
 	public int indexDaisyPlayerUsed = 0;
 	public int indexBerryPlayerUsed = 0;
 	public int daisyCounter = 0;
@@ -55,6 +59,7 @@ public class Player extends Entity {
 		x_temp = x;
 		y = 100 + playerIndex * 215;
 		speed = 2;
+		bonus = 0;
 		direction = "right";
 		if (playerIndex == 0) {
 			color = "white";
@@ -85,13 +90,15 @@ public class Player extends Entity {
 
 	public void update() {
 		if (gp.dice.rollingFinished) {
+			int BonusDis = 0;
+			if(bonus > 0) BonusDis = 80;
 			if (gp.dice.rolled == true) {
 				x += speed;
 				isMoving = true;
 				gp.gameState = gp.pauseState;
 
 			}
-			if (x >= (x_temp + gp.dice.getFace() * 26 + firstmove)) {
+			if (x >= (x_temp + gp.dice.getFace() * 26 + firstmove + BonusDis)) {
 				added = false;
 				firstmove = 0;
 				changePlayer = true;

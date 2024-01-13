@@ -29,8 +29,7 @@ public class UI {
 	public String textOption = "Which player do you\nexpect to come first?";
 	int slotRow = 0;
 	int slotCol = 0;
-	public boolean daisyCrossed = false;
-	public boolean berryCrossed = false;
+	
 	public int scencePhase = 0;
 	int counter = 0;
 	float alpha;
@@ -67,7 +66,7 @@ public class UI {
 			drawGameScreen();
 			drawInventory();
 			drawItem();
-			checkCrossed();
+			// checkCrossed();
 		}
 		if (gp.gameState == gp.ending) {
 			drawEnding();
@@ -87,6 +86,7 @@ public class UI {
 		g2.drawImage(strawImage, pos, 0, (int) (gp.screenWidth * 0.15), gp.screenHeight, null);
 		pos += gp.screenWidth / 15 + (int) (gp.screenWidth * 0.15);
 		g2.drawImage(finishImage, pos, 0, gp.screenWidth / 4, gp.screenHeight, null);
+
 		g2.fillRect((int)(gp.gridSize * 2.5 + (gp.screenWidth / 5 - 15)), 0, 10, 1050);
 		g2.fillRect((int) (gp.gridSize * 2.5) + gp.screenWidth / 15 + gp.screenWidth / 5 - 15 + (int) (gp.screenWidth * 0.15), 0, 10, 1050);
 	}
@@ -484,7 +484,7 @@ public class UI {
 					daisyObjectImage = ImageIO
 							.read(getClass().getResourceAsStream("/image/daisy/" + player.color + "_daisy.png"));
 					g2.drawImage(daisyObjectImage, pos + 150 - (int)(player.indexDaisyPlayerUsed*gp.gridSize*0.4), 
-							player.yPlayerUsedItemOn, 80, 80, null);
+							player.yPlayerUsedItem_1_On, 80, 80, null);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -495,25 +495,44 @@ public class UI {
 							.read(getClass().getResourceAsStream("/image/strawberry/" + player.color + "_berry.png"));
 					pos += gp.screenWidth / 15 + gp.screenWidth / 5 - 15;
 					g2.drawImage(berryObjectImage, pos + 150 - (int)(player.indexBerryPlayerUsed*gp.gridSize*0.4), 
-							player.yPlayerUsedItemOn, 80, 80, null);
+							player.yPlayerUsedItem_2_On, 80, 80, null);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
 	}
+
 	public void checkCrossed() {
 		int daisyPos = (int)(gp.gridSize * 2.5 + (gp.screenWidth / 5 - 15));
 		int berryPos =  (int) (gp.gridSize * 2.5) + gp.screenWidth / 15 + gp.screenWidth / 5 - 15 + (int) (gp.screenWidth * 0.15);
-		for (Player player : gp.players) {
-			if(player.x + 80 >= daisyPos && player.x < berryPos) {
-				daisyCrossed = true;
-			}
-			else if (player.x + 80 >= berryPos) {
-				berryCrossed = true;
+		if(!gp.berryCrossed) {
+			for (Player player : gp.players) {
+				if(player.x + 80 >= daisyPos && player.x < berryPos && gp.daisyCrossed == false) {
+					for(Player bonusPlayer : gp.players) {
+						if (bonusPlayer.yPlayerUsedItem_1_On == player.y) {
+							
+							bonusPlayer.bonus = 1;
+						}
+					}
+					gp.daisyCrossed = true;
+					return;
+				}
+				else if (player.x + 80 >= berryPos && gp.berryCrossed == false) {
+					for(Player bonusPlayer : gp.players) {
+						if (bonusPlayer.yPlayerUsedItem_2_On == player.y) {
+
+							bonusPlayer.bonus = 2;
+						}
+
+					}
+					gp.berryCrossed = true;
+					return;
+				}
 			}
 		}
-		System.out.println(daisyCrossed + " " + berryCrossed);
+		
+		//System.out.println(daisyCrossed + " " + berryCrossed);
 	}
 	public int getXForCenteredText(String text) {
 		int length = g2.getFontMetrics().stringWidth(text);

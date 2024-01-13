@@ -129,10 +129,10 @@ public class KeyHandler implements KeyListener {
 			}
 			if (code == KeyEvent.VK_ENTER) {
 				gp.playSE(1);
-				if (gp.ui.daisyCrossed == false && (gp.ui.slotCol == 0 || gp.ui.slotCol == 1)) {
+				if (gp.daisyCrossed == false && (gp.ui.slotCol == 0 || gp.ui.slotCol == 1)) {
 					gp.gameState = gp.optionState;
 				}
-				if (gp.ui.berryCrossed == false && gp.ui.slotCol == 1) {
+				if (gp.berryCrossed == false && gp.ui.slotCol == 1) {
 					gp.gameState = gp.optionState;
 				}
 			}
@@ -158,22 +158,22 @@ public class KeyHandler implements KeyListener {
 					gp.players.get(gp.currentPlayerIndex).inventoryList.get(0).used = true;
 					gp.players.get(gp.currentPlayerIndex).useDaisy = true;
 					if (gp.ui.commandNum == 0) {
-						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(0).y;
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItem_1_On = gp.players.get(0).y;
 						gp.players.get(0).daisyCounter++;
 						gp.players.get(gp.currentPlayerIndex).indexDaisyPlayerUsed = gp.players.get(0).daisyCounter;
 					}
 					if (gp.ui.commandNum == 1) {
-						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(1).y;
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItem_1_On = gp.players.get(1).y;
 						gp.players.get(1).daisyCounter++;
 						gp.players.get(gp.currentPlayerIndex).indexDaisyPlayerUsed = gp.players.get(1).daisyCounter;
 					}
 					if (gp.ui.commandNum == 2) {
-						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(2).y;
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItem_1_On = gp.players.get(2).y;
 						gp.players.get(2).daisyCounter++;
 						gp.players.get(gp.currentPlayerIndex).indexDaisyPlayerUsed = gp.players.get(2).daisyCounter;
 					}
 					if (gp.ui.commandNum == 3) {
-						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(3).y;
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItem_1_On = gp.players.get(3).y;
 						gp.players.get(3).daisyCounter++;
 						gp.players.get(gp.currentPlayerIndex).indexDaisyPlayerUsed = gp.players.get(3).daisyCounter;
 					}
@@ -182,22 +182,22 @@ public class KeyHandler implements KeyListener {
 					gp.players.get(gp.currentPlayerIndex).inventoryList.get(1).used = true;
 					gp.players.get(gp.currentPlayerIndex).useStrawberry = true;
 					if (gp.ui.commandNum == 0) {
-						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(0).y;
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItem_2_On = gp.players.get(0).y;
 						gp.players.get(0).berryCounter++;
 						gp.players.get(gp.currentPlayerIndex).indexBerryPlayerUsed = gp.players.get(0).berryCounter;
 					}
 					if (gp.ui.commandNum == 1) {
-						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(1).y;
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItem_2_On = gp.players.get(1).y;
 						gp.players.get(1).berryCounter++;
 						gp.players.get(gp.currentPlayerIndex).indexBerryPlayerUsed = gp.players.get(1).berryCounter;
 					}
 					if (gp.ui.commandNum == 2) {
-						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(2).y;
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItem_2_On = gp.players.get(2).y;
 						gp.players.get(2).berryCounter++;
 						gp.players.get(gp.currentPlayerIndex).indexBerryPlayerUsed = gp.players.get(2).berryCounter;
 					}
 					if (gp.ui.commandNum == 3) {
-						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItemOn = gp.players.get(3).y;
+						gp.players.get(gp.currentPlayerIndex).yPlayerUsedItem_2_On = gp.players.get(3).y;
 						gp.players.get(3).berryCounter++;
 						gp.players.get(gp.currentPlayerIndex).indexBerryPlayerUsed = gp.players.get(3).berryCounter;
 					}

@@ -45,6 +45,8 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int inventoryState = 3;
 	public final int ending = 4;
 	public final int optionState = 5;
+	public boolean daisyCrossed = false;
+	public boolean berryCrossed = false;
 	Thread gameThread;
 
 	public GamePanel() {
@@ -57,6 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setFocusable(true);
 
 		this.winner = 0;
+
 		// Player newPlayer = new Player(this, this.keyH, 0);
 		// this.addPlayer(newPlayer);
 	}
@@ -65,6 +68,8 @@ public class GamePanel extends JPanel implements Runnable {
 		// playMusic(0);
 		Player newPlayer = new Player(this, this.keyH, 0);
 		this.addPlayer(newPlayer);
+		this.daisyCrossed = false;
+		this.berryCrossed = false;
 		gameState = titleState;
 	}
 
@@ -108,8 +113,7 @@ public class GamePanel extends JPanel implements Runnable {
 		Player currentPlayer = players.get(currentPlayerIndex);
 		dice.update();
 		currentPlayer.update();
-		// List<body> newBodyParts = new ArrayList<>();
-
+		
 		// Update existing body parts and identify new ones
 		Iterator<Body> iterator = bodyparts.iterator();
 		while (iterator.hasNext()) {
@@ -118,17 +122,26 @@ public class GamePanel extends JPanel implements Runnable {
 				bodypart.update();
 			}
 		}
-
+		
 		if (ConditionToChangePlayer() && !currentPlayer.added) {
-			Body newPart = new Body(this, dice.getFace(), currentPlayerIndex);
-			bodyparts.add(newPart);
+			if(currentPlayer.bonus == 0) {
+				Body newPart = new Body(this, dice.getFace(), currentPlayerIndex, 180, 0);
+				bodyparts.add(newPart);
+				
+			} else {
+				Body newPart = new Body(this, dice.getFace(), currentPlayerIndex, 260, 0);
+				bodyparts.add(newPart);
+				Body newPart1 = new Body(this, 3, currentPlayerIndex, 180, currentPlayer.bonus);
+				bodyparts.add(newPart1);
+				currentPlayer.bonus = 0;
+			}
 			currentPlayer.added = true;
 		} else if (ConditionToChangePlayer()) {
 			currentPlayer.changePlayer = false;
 			currentPlayer.isMoving = false;
 			nextPlayer();
 		}
-
+		ui.checkCrossed();
 		// if (ConditionToChangePlayer()) {
 		// if(!currentPlayer.added) {
 		// body newPart = new body(this, dice.getFace(), currentPlayerIndex);
@@ -152,7 +165,8 @@ public class GamePanel extends JPanel implements Runnable {
 		// Clear players and body parts
 		players.clear();
 		bodyparts.clear();
-	
+		this.daisyCrossed = false;
+		this.berryCrossed = false;
 		// Reset player index and add a new player
 		currentPlayerIndex = 0;
 		Player newPlayer = new Player(this, keyH, 0);

@@ -12,55 +12,73 @@ public class Body extends Entity {
   GamePanel gp;
   int bodyLength;
   int x_temp, firstmove;
+  int normal = 0;
+  int bonus_daisy = 1;
+  int bonus_berry = 2;
   public int belong;
   public boolean isNew = true;
   public boolean toRemove = false;
 
-  public Body(GamePanel gp, int bodyLength, int playerIndex) {
+  public Body(GamePanel gp, int bodyLength, int playerIndex, int initialPos, int type) {
     super(gp);
     this.gp = gp;
     this.bodyLength = bodyLength;
     this.belong = playerIndex;
-    setDefaultValues();
-    getImage();
+    setDefaultValues(initialPos);
+    if (type == normal) {
+      getImage();
+    } else {
+      if (type == bonus_daisy)
+        getDaisyImage();
+      else
+        getBerryImage();
+    }
   }
 
-  public void setDefaultValues(){
+  public void setDefaultValues(int initialPos) {
     speed = 2;
-    x = 180;
+    x = initialPos;
     x_temp = x;
   }
 
   public void update() {
     // if (gp.dice.rolled == true) {
-		// 	x += speed;
-			
-		// 	gp.gameState = gp.pauseState;
-		// }
-		// if (x >= (x_temp + gp.dice.getFace() * 26 )) {
-		// 	gp.gameState = gp.playState;
-		// 	x_temp = x;
-    //   // gp.players.get(belong).added = true;
-		// 	// gp.dice.rolled = false;
-		// }
-    if(gp.players.get(belong).isMoving){
-        x += speed;
+    // x += speed;
+
+    // gp.gameState = gp.pauseState;
+    // }
+    // if (x >= (x_temp + gp.dice.getFace() * 26 )) {
+    // gp.gameState = gp.playState;
+    // x_temp = x;
+    // // gp.players.get(belong).added = true;
+    // // gp.dice.rolled = false;
+    // }
+    if (gp.players.get(belong).isMoving) {
+      x += speed;
     }
   }
 
-public boolean isNew() {
+  public boolean isNew() {
     return isNew;
-}
+  }
 
-// Method to mark the body part for removal
-public void markToRemove() {
-    toRemove = true;
-}
+  public void getBerryImage() {
+    try {
+      bodyImage = ImageIO.read(getClass().getResourceAsStream("/image/strawberry/" + gp.players.get(belong).color + "_berry.png"));
 
-// Method to check if the body part should be removed
-public boolean isToRemove() {
-    return toRemove;
-}
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void getDaisyImage() {
+    try {
+      bodyImage = ImageIO.read(getClass().getResourceAsStream("/image/daisy/" + gp.players.get(belong).color + "_daisy.png"));
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   public void getImage() {
     try {
