@@ -21,7 +21,7 @@ public class Background {
 	public void getBackground() {
 		try {
 			image[0] = ImageIO.read(getClass().getResourceAsStream("/image/title/wallpaperflare.com_wallpaper.png"));
-			image[1] = ImageIO.read(getClass().getResourceAsStream("/image/misc/map.png"));
+			image[1] = ImageIO.read(getClass().getResourceAsStream("/image/misc/map_new.jpg"));
 
 		} catch (IOException e) {
 			e.printStackTrace();

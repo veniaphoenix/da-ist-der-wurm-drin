@@ -29,7 +29,6 @@ public class UI {
 	public String textOption = "Which player do you\nexpect to come first?";
 	int slotRow = 0;
 	int slotCol = 0;
-	
 	public int scencePhase = 0;
 	int counter = 0;
 	float alpha;
@@ -66,7 +65,7 @@ public class UI {
 			drawGameScreen();
 			drawInventory();
 			drawItem();
-			// checkCrossed();
+//			 checkCrossed();
 		}
 		if (gp.gameState == gp.ending) {
 			drawEnding();
@@ -86,9 +85,6 @@ public class UI {
 		g2.drawImage(strawImage, pos, 0, (int) (gp.screenWidth * 0.15), gp.screenHeight, null);
 		pos += gp.screenWidth / 15 + (int) (gp.screenWidth * 0.15);
 		g2.drawImage(finishImage, pos, 0, gp.screenWidth / 4, gp.screenHeight, null);
-
-		g2.fillRect((int)(gp.gridSize * 2.5 + (gp.screenWidth / 5 - 15)), 0, 10, 1050);
-		g2.fillRect((int) (gp.gridSize * 2.5) + gp.screenWidth / 15 + gp.screenWidth / 5 - 15 + (int) (gp.screenWidth * 0.15), 0, 10, 1050);
 	}
 
 	public void drawInventory() {
@@ -479,33 +475,37 @@ public class UI {
 	public void drawItem() {
 		for (Player player : gp.players) {
 			int pos = (int) (gp.gridSize * 2.5);
-			if (player.useDaisy) {
-				try {
-					daisyObjectImage = ImageIO
-							.read(getClass().getResourceAsStream("/image/daisy/" + player.color + "_daisy.png"));
-					g2.drawImage(daisyObjectImage, pos + 150 - (int)(player.indexDaisyPlayerUsed*gp.gridSize*0.4), 
-							player.yPlayerUsedItem_1_On, 80, 80, null);
-				} catch (IOException e) {
-					e.printStackTrace();
+			if(gp.daisyCrossed == false) {
+				if (player.useDaisy) {
+					try {
+						daisyObjectImage = ImageIO
+								.read(getClass().getResourceAsStream("/image/daisy/" + player.color + "_daisy.png"));
+						g2.drawImage(daisyObjectImage, pos + 150 - (int)(player.indexDaisyPlayerUsed*gp.gridSize*0.4), 
+								player.yPlayerUsedItem_1_On, 80, 80, null);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
-			if (player.useStrawberry) {
-				try {
-					berryObjectImage = ImageIO
-							.read(getClass().getResourceAsStream("/image/strawberry/" + player.color + "_berry.png"));
-					pos += gp.screenWidth / 15 + gp.screenWidth / 5 - 15;
-					g2.drawImage(berryObjectImage, pos + 150 - (int)(player.indexBerryPlayerUsed*gp.gridSize*0.4), 
-							player.yPlayerUsedItem_2_On, 80, 80, null);
-				} catch (IOException e) {
-					e.printStackTrace();
+			if (gp.berryCrossed == false) {
+				if (player.useStrawberry) {
+					try {
+						berryObjectImage = ImageIO
+								.read(getClass().getResourceAsStream("/image/strawberry/" + player.color + "_berry.png"));
+						pos += gp.screenWidth / 15 + gp.screenWidth / 5 - 15;
+						g2.drawImage(berryObjectImage, pos + 150 - (int)(player.indexBerryPlayerUsed*gp.gridSize*0.4), 
+								player.yPlayerUsedItem_2_On, 80, 80, null);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
 	}
 
 	public void checkCrossed() {
-		int daisyPos = (int)(gp.gridSize * 2.5 + (gp.screenWidth / 5 - 15));
-		int berryPos =  (int) (gp.gridSize * 2.5) + gp.screenWidth / 15 + gp.screenWidth / 5 - 15 + (int) (gp.screenWidth * 0.15);
+		final int daisyPos = (int)(gp.gridSize * 2.5 + (gp.screenWidth / 5 - 15));
+		final int berryPos =  (int) (gp.gridSize * 2.5) + gp.screenWidth / 15 + gp.screenWidth / 5 - 15 + (int) (gp.screenWidth * 0.15);
 		if(!gp.berryCrossed) {
 			for (Player player : gp.players) {
 				if(player.x + 80 >= daisyPos && player.x < berryPos && gp.daisyCrossed == false) {
