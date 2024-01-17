@@ -58,8 +58,15 @@ public class UI {
 		}
 
 		if (gp.gameState == gp.playState || gp.gameState == gp.pauseState) {
-			drawGameScreen();
+//			drawGameScreen();
 			drawItem();
+			// new coordinates for each worm
+			Color c = new Color(0, 0, 0, 100);
+			g2.setColor(c);
+			g2.fillRect(100, 100 + 100+5, 1650, 80);
+			g2.fillRect(100, 100 + 215 + 75, 1650, 80);
+			g2.fillRect(100, 100 + 2*215 + 43, 1650, 80);
+			g2.fillRect(100, 100 + 3*215 + 10, 1650, 80);
 		}
 		if (gp.gameState == gp.inventoryState) {
 			drawGameScreen();
