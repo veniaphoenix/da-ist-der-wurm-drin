@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int optionState = 5;
 	public boolean daisyCrossed = false;
 	public boolean berryCrossed = false;
+
 	Thread gameThread;
 
 	public GamePanel() {

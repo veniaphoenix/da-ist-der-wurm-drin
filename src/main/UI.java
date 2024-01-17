@@ -317,7 +317,7 @@ public class UI {
 		// }
 		if (scencePhase == 0) {
 			// can insert winning music here
-
+			gp.playSE(2);
 			gp.background.draw(g2, gp.playState);
 			gp.dice.draw(g2, 1565, 780);
 			for (Player player : gp.players) {
@@ -387,10 +387,6 @@ public class UI {
 		}
 
 		if (scencePhase == 6) {
-			// while (gp.players.size() > 1) {
-			// gp.players = Collections.singletonList(gp.players.get(0));
-			// }
-			// gp.bodyparts.clear();
 			scencePhase = 0;
 			gp.retry();
 			gp.gameState = gp.titleState;

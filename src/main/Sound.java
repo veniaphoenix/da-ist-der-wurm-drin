@@ -15,6 +15,7 @@ public class Sound {
 	public Sound() {
 		soundURL[0] = getClass().getResource("/sound/theme.wav");
 		soundURL[1] = getClass().getResource("/sound/cursor.wav");
+		soundURL[2] = getClass().getResource("/sound/fanfare.wav");
 	}
 
 	public void loadFile(int i) {
