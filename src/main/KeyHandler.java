@@ -129,10 +129,14 @@ public class KeyHandler implements KeyListener {
 			}
 			if (code == KeyEvent.VK_ENTER) {
 				gp.playSE(1);
-				if (gp.daisyCrossed == false && (gp.ui.slotCol == 0 || gp.ui.slotCol == 1)) {
+				if (gp.daisyCrossed == false 
+						&& (gp.ui.slotCol == 0 || gp.ui.slotCol == 1) 
+						&& gp.players.get(gp.currentPlayerIndex).inventoryList.get(0).used == false) {
 					gp.gameState = gp.optionState;
 				}
-				if (gp.berryCrossed == false && gp.ui.slotCol == 1) {
+				if (gp.berryCrossed == false 
+						&& gp.ui.slotCol == 1
+						&& gp.players.get(gp.currentPlayerIndex).inventoryList.get(1).used == false) {
 					gp.gameState = gp.optionState;
 				}
 			}
