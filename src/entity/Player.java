@@ -62,13 +62,13 @@ public class Player extends Entity {
 		bonus = 0;
 		direction = "right";
 		if (playerIndex == 0) {
-			color = "white";
-		} else if (playerIndex == 1) {
 			color = "blue";
-		} else if (playerIndex == 2) {
-			color = "orange";
-		} else if (playerIndex == 3) {
+		} else if (playerIndex == 1) {
 			color = "red";
+		} else if (playerIndex == 2) {
+			color = "white";
+		} else if (playerIndex == 3) {
+			color = "orange";
 		}
 		daisy = new OBJ_Daisy(gp, color);
 		berry = new OBJ_Berry(gp, color);
