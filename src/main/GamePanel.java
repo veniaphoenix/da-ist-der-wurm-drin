@@ -126,13 +126,13 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		if (ConditionToChangePlayer() && !currentPlayer.added) {
 			if(currentPlayer.bonus == 0) {
-				Body newPart = new Body(this, dice.getFace(), currentPlayerIndex, 180, 0);
+				Body newPart = new Body(this, dice.getFace(), currentPlayerIndex, 230, 0);
 				bodyparts.add(newPart);
 				
 			} else {
-				Body newPart = new Body(this, dice.getFace(), currentPlayerIndex, 260, 0);
+				Body newPart = new Body(this, dice.getFace(), currentPlayerIndex, 310, 0);
 				bodyparts.add(newPart);
-				Body newPart1 = new Body(this, 3, currentPlayerIndex, 180, currentPlayer.bonus);
+				Body newPart1 = new Body(this, 3, currentPlayerIndex, 230, currentPlayer.bonus);
 				bodyparts.add(newPart1);
 				currentPlayer.bonus = 0;
 			}
