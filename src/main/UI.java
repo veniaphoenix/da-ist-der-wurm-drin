@@ -370,13 +370,14 @@ public class UI {
 		}
 
 		if (scencePhase == 4) {
-			drawBlackBackground(1f);
-			String text = "Credits\n"; // add credits here
+			// drawBlackBackground(1f);
+			// String text = "Credits\n"; // add credits here
 
-			drawString(1f, 150f, gp.screenHeight / 3, text, 130);
-			if (counterReached(480)) {
-				scencePhase++;
-			}
+			// drawString(1f, 150f, gp.screenHeight / 3, text, 130);
+			// if (counterReached(480)) {
+			// 	scencePhase++;
+			// }
+			scencePhase++;
 		}
 
 		if (scencePhase == 5) {

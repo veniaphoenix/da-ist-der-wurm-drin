@@ -214,7 +214,7 @@ public class GamePanel extends JPanel implements Runnable {
 				gameState == inventoryState ||
 				gameState == optionState){
 			background.draw(g2, playState);
-			dice.draw(g2, 1565, 780);
+			dice.draw(g2, 1565, 50);
 			for (Player player : players) {
 				player.draw(g2);
 			}

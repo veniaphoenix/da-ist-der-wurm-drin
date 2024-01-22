@@ -15,9 +15,6 @@ public class DiceRoller extends Entity {
 	// public Image diceImage;
 	public boolean isRolling;
 	public boolean rolled;
-	public int animationCounter;
-	public static final int ROLL_SPEED = 2;
-	public static final int TOTAL_FRAMES = 180;
 	long StartTime, EndTime;
 	public boolean rollingFinished = true;
 
@@ -27,7 +24,6 @@ public class DiceRoller extends Entity {
 		face = 1;
 		loadImage();
 		isRolling = false;
-		animationCounter = 0;
 		rolled = false;
 	}
 
@@ -73,8 +69,6 @@ public class DiceRoller extends Entity {
 			}
 		});
 		rollThread.start();
-//		rolled = false;
-		// rollingFinished = true;
 	}
 
 	public void update() {

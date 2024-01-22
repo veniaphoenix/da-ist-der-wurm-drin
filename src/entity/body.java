@@ -11,7 +11,6 @@ public class Body extends Entity {
 
   GamePanel gp;
   int bodyLength;
-  int x_temp, firstmove;
   int normal = 0;
   int bonus_daisy = 1;
   int bonus_berry = 2;
@@ -36,7 +35,6 @@ public class Body extends Entity {
   public void setDefaultValues(int initialPos) {
     speed = 2;
     x = initialPos;
-    x_temp = x;
   }
 
   public void update() {
