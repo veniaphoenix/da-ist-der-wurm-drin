@@ -16,8 +16,6 @@ public class Body extends Entity {
   int bonus_daisy = 1;
   int bonus_berry = 2;
   public int belong;
-  public boolean isNew = true;
-  public boolean toRemove = false;
 
   public Body(GamePanel gp, int bodyLength, int playerIndex, int initialPos, int type) {
     super(gp);
@@ -42,24 +40,9 @@ public class Body extends Entity {
   }
 
   public void update() {
-    // if (gp.dice.rolled == true) {
-    // x += speed;
-
-    // gp.gameState = gp.pauseState;
-    // }
-    // if (x >= (x_temp + gp.dice.getFace() * 26 )) {
-    // gp.gameState = gp.playState;
-    // x_temp = x;
-    // // gp.players.get(belong).added = true;
-    // // gp.dice.rolled = false;
-    // }
     if (gp.players.get(belong).isMoving) {
       x += speed;
     }
-  }
-
-  public boolean isNew() {
-    return isNew;
   }
 
   public void getBerryImage() {
