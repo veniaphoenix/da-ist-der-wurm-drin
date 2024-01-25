@@ -55,7 +55,7 @@ public class Player extends Entity {
 		isMoving = false;
 		changePlayer = false;
 		added = true;
-		x = 150;
+		x = 120;
 		x_temp = x;
 		y = 180 + playerIndex * 170;
 		speed = 2;

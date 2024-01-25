@@ -20,7 +20,7 @@ public class UI {
 	Graphics2D g2;
 	Font CHLORINR, pixelFont;
 	public BufferedImage image, text, diceImage, daisyImage, strawImage, finishImage, daisyObjectImage,
-			berryObjectImage;
+			berryObjectImage, upper;
 	int commandNum = 0;
 	int numberOfPlayer = 2;
 	float image_scale = 3 / 4;
@@ -58,7 +58,7 @@ public class UI {
 		}
 
 		if (gp.gameState == gp.playState || gp.gameState == gp.pauseState) {
-//			drawGameScreen();
+			drawGameScreen();
 			drawItem();
 			// new coordinates for each worm
 			Color c = new Color(255, 0, 0);
@@ -88,12 +88,13 @@ public class UI {
 	}
 
 	public void drawGameScreen() {
-		int pos = (int) (gp.gridSize * 2.5);
-		g2.drawImage(daisyImage, pos, 0, gp.screenWidth / 5 - 15, gp.screenHeight, null);
-		pos += gp.screenWidth / 15 + gp.screenWidth / 5 - 15;
-		g2.drawImage(strawImage, pos, 0, (int) (gp.screenWidth * 0.15), gp.screenHeight, null);
-		pos += gp.screenWidth / 15 + (int) (gp.screenWidth * 0.15);
-		g2.drawImage(finishImage, pos, 0, gp.screenWidth / 4, gp.screenHeight, null);
+		// int pos = (int) (gp.gridSize * 2.5);
+		// g2.drawImage(daisyImage, pos, 0, gp.screenWidth / 5 - 15, gp.screenHeight, null);
+		// pos += gp.screenWidth / 15 + gp.screenWidth / 5 - 15;
+		// g2.drawImage(strawImage, pos, 0, (int) (gp.screenWidth * 0.15), gp.screenHeight, null);
+		// pos += gp.screenWidth / 15 + (int) (gp.screenWidth * 0.15);
+		// g2.drawImage(finishImage, pos, 0, gp.screenWidth / 4, gp.screenHeight, null);
+		g2.drawImage(upper, 200, 50, gp.screenWidth / 4 * 3, gp.screenHeight/9 * 8, null);
 	}
 
 	public void drawInventory() {
@@ -577,6 +578,7 @@ public class UI {
 			strawImage = ImageIO.read(getClass().getResourceAsStream("/image/misc/map_straw.png"));
 			finishImage = ImageIO.read(getClass().getResourceAsStream("/image/misc/map_end.png"));
 			text = ImageIO.read(getClass().getResourceAsStream("/image/title/text.png"));
+			upper = ImageIO.read(getClass().getResourceAsStream("/image/misc/map-upper-layer.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();

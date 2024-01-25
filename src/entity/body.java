@@ -73,6 +73,6 @@ public class Body extends Entity {
   public void draw(Graphics2D g2) {
 
     BufferedImage image = bodyImage;
-    g2.drawImage(image, x, 100 + belong * 215, bodyLength * 26, 80, null);
+    g2.drawImage(image, x, 180 + belong * 170, bodyLength * 26, 80, null);
   }
 }
