@@ -16,22 +16,22 @@ public class Player extends Entity {
 	public int x_temp;
 	int firstmove;
 
-	public int playerIndex;
-	public boolean win;
-	public boolean changePlayer;
-	public boolean added;
-	public boolean isMoving;
-	public boolean useStrawberry = false;
+	public int playerIndex;	// player 1,2,3,4
+	public boolean win;	// decide if this player win or not
+	public boolean changePlayer;	// decide if the player turn has end and move to next player
+	public boolean added;	// to check whether the new body section has been added or not
+	public boolean isMoving;	// to check if the player is still in moving phase
+	public boolean useStrawberry = false;	// to check if player use the item to bet
 	public boolean useDaisy = false;
 
-	public int bonus;
+	public int bonus;	// to check if player win the bet
 
-	public int yPlayerUsedItem_1_On;
-	public int yPlayerUsedItem_2_On;
-	public int indexDaisyPlayerUsed = 0;
-	public int indexBerryPlayerUsed = 0;
-	public int daisyCounter = 0;
-	public int berryCounter = 0;
+	public int yPlayerUsedItem_1_On;	// to check if player bet on who reach daisy 1st
+	public int yPlayerUsedItem_2_On;	// to check if player bet on who reach berry 1st
+	public int indexDaisyPlayerUsed = 0;	// to check which player this player bet on
+	public int indexBerryPlayerUsed = 0;	// to check which player this player bet on
+	public int daisyCounter = 0;	// number of people bet on this player
+	public int berryCounter = 0;	// number of people bet on this player
 
 	Graphics2D g;
 
@@ -84,6 +84,7 @@ public class Player extends Entity {
 	}
 
 	public void setInventory() {
+		// each player have 2 item to bet
 		inventoryList.add(daisy);
 		inventoryList.add(berry);
 	}

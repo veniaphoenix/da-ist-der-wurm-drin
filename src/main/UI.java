@@ -61,12 +61,14 @@ public class UI {
 //			drawGameScreen();
 			drawItem();
 			// new coordinates for each worm
-			Color c = new Color(0, 0, 0, 100);
+			Color c = new Color(255, 0, 0);
 			g2.setColor(c);
-			g2.fillRect(100, 100 + 100+5, 1650, 80);
-			g2.fillRect(100, 100 + 215 + 75, 1650, 80);
-			g2.fillRect(100, 100 + 2*215 + 43, 1650, 80);
-			g2.fillRect(100, 100 + 3*215 + 10, 1650, 80);
+			
+			//for testing the tilt of lower layer
+			g2.fillRect(0, 185, 1680, 5);
+			
+			//for testing the tilt of upper layer
+			g2.fillRect(401, 0, 5, 1050);
 		}
 		if (gp.gameState == gp.inventoryState) {
 			drawGameScreen();
@@ -422,17 +424,17 @@ public class UI {
 		int frameY = gp.gridSize * 3;
 		drawSubWindow(frameX, frameY, frameWidth, frameHeight, textOption);
 		int textY = (int) (gp.gridSize * 4.6);
-		Color c = new Color(255, 250, 250);
+		Color c = new Color(0, 0, 205); //blue
 		g2.setColor(c);
-		g2.drawString("White", frameX + getXForCenteredTextSubWindow(frameWidth, "White"), textY);
+		g2.drawString("Blue", frameX + getXForCenteredTextSubWindow(frameWidth, "Blue"), textY);
 		g2.setStroke(new BasicStroke(5));
 		if (commandNum == 0) {
 			g2.drawRoundRect(frameX + 10, textY - getTextHeight(), frameWidth - 20, getTextHeight() + 10, 25, 25);
 		}
 		textY += gp.gridSize * 0.7;
-		c = new Color(0, 0, 205);
+		c = new Color(220, 20, 60); //red
 		g2.setColor(c);
-		g2.drawString("Blue", frameX + getXForCenteredTextSubWindow(frameWidth, "Blue"), textY);
+		g2.drawString("Red", frameX + getXForCenteredTextSubWindow(frameWidth, "Red"), textY);
 		g2.setStroke(new BasicStroke(5));
 		if (commandNum == 1) {
 			g2.drawRoundRect(frameX + 10, textY - getTextHeight(), frameWidth - 20, getTextHeight() + 10, 25, 25);
@@ -440,9 +442,9 @@ public class UI {
 		}
 		if (numberOfPlayer >= 3) {
 			textY += gp.gridSize * 0.7;
-			c = new Color(255, 127, 80);
+			c = new Color(255, 250, 250); //white
 			g2.setColor(c);
-			g2.drawString("Orange", frameX + getXForCenteredTextSubWindow(frameWidth, "Orange"), textY);
+			g2.drawString("White", frameX + getXForCenteredTextSubWindow(frameWidth, "White"), textY);
 			g2.setStroke(new BasicStroke(5));
 			if (commandNum == 2) {
 				g2.drawRoundRect(frameX + 10, textY - getTextHeight(), frameWidth - 20, getTextHeight() + 10, 25, 25);
@@ -451,9 +453,9 @@ public class UI {
 		
 		if (numberOfPlayer >= 4) {
 			textY += gp.gridSize * 0.7;
-			c = new Color(220, 20, 60);
+			c = new Color(255, 127, 80); //orange
 			g2.setColor(c);
-			g2.drawString("Red", frameX + getXForCenteredTextSubWindow(frameWidth, "Red"), textY);
+			g2.drawString("Orange", frameX + getXForCenteredTextSubWindow(frameWidth, "Orange"), textY);
 			g2.setStroke(new BasicStroke(5));
 			if (commandNum == 3) {
 				g2.drawRoundRect(frameX + 10, textY - getTextHeight(), frameWidth - 20, getTextHeight() + 10, 25, 25);
