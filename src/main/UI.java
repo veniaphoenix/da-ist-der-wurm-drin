@@ -61,12 +61,14 @@ public class UI {
 //			drawGameScreen();
 			drawItem();
 			// new coordinates for each worm
-			Color c = new Color(0, 0, 0, 100);
+			Color c = new Color(255, 0, 0);
 			g2.setColor(c);
-			g2.fillRect(100, 100 + 100+5, 1650, 80);
-			g2.fillRect(100, 100 + 215 + 75, 1650, 80);
-			g2.fillRect(100, 100 + 2*215 + 43, 1650, 80);
-			g2.fillRect(100, 100 + 3*215 + 10, 1650, 80);
+			
+			//for testing the tilt of lower layer
+			g2.fillRect(0, 185, 1680, 5);
+			
+			//for testing the tilt of upper layer
+			g2.fillRect(401, 0, 5, 1050);
 		}
 		if (gp.gameState == gp.inventoryState) {
 			drawGameScreen();

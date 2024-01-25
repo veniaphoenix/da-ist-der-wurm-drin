@@ -21,7 +21,7 @@ public class Background {
 	public void getBackground() {
 		try {
 			image[0] = ImageIO.read(getClass().getResourceAsStream("/image/title/wallpaperflare.com_wallpaper.png"));
-			image[1] = ImageIO.read(getClass().getResourceAsStream("/image/misc/map_test.png"));
+			image[1] = ImageIO.read(getClass().getResourceAsStream("/image/misc/map-upper-layer.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -30,5 +30,6 @@ public class Background {
 
 	public void draw(Graphics2D g2, int i) {
 		g2.drawImage(image[i], 0, 0, gp.screenWidth, gp.screenHeight, null);
+
 	}
 }

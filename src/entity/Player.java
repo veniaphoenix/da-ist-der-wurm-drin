@@ -57,7 +57,7 @@ public class Player extends Entity {
 		added = true;
 		x = 150;
 		x_temp = x;
-		y = 180 + playerIndex * 170;
+		y = 100 + playerIndex * 215;
 		speed = 2;
 		bonus = 0;
 		direction = "right";
