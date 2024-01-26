@@ -68,7 +68,7 @@ public class UI {
 			g2.fillRect(0, 185, 1680, 5);
 			
 			//for testing the tilt of upper layer
-			g2.fillRect(401, 0, 5, 1050);
+			g2.fillRect((int)(gp.screenWidth/10 * 8.7), 0, 5, 1050);
 		}
 		if (gp.gameState == gp.inventoryState) {
 			drawGameScreen();

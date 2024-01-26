@@ -62,13 +62,13 @@ public class Player extends Entity {
 		bonus = 0;
 		direction = "right";
 		if (playerIndex == 0) {
-			color = "white";
-		} else if (playerIndex == 1) {
 			color = "blue";
-		} else if (playerIndex == 2) {
-			color = "orange";
-		} else if (playerIndex == 3) {
+		} else if (playerIndex == 1) {
 			color = "red";
+		} else if (playerIndex == 2) {
+			color = "white";
+		} else if (playerIndex == 3) {
+			color = "orange";
 		}
 		daisy = new OBJ_Daisy(gp, color);
 		berry = new OBJ_Berry(gp, color);
@@ -106,7 +106,7 @@ public class Player extends Entity {
 				gp.gameState = gp.playState;
 				x_temp = x;
 				gp.dice.rolled = false;
-				if (x >= gp.screenWidth - gp.screenWidth / 5) {
+				if (x >= (int)(gp.screenWidth/10 * 8.7)) {
 					win = true;
 					gp.gameState = gp.ending;
 					// return;
