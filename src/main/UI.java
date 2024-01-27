@@ -517,8 +517,8 @@ public class UI {
 	}
 
 	public void checkCrossed() {
-		final int daisyPos = gp.screenWidth / 10 * 3;
-		final int berryPos = (int) (gp.screenWidth / 10 * 5.4);
+		final int daisyPos = (int) (gp.screenWidth / 10 * 3.98);
+		final int berryPos = (int) (gp.screenWidth / 10 * 6.4);
 		if (!gp.berryCrossed) {
 			for (Player player : gp.players) {
 				if (player.x + 80 >= daisyPos && player.x < berryPos && gp.daisyCrossed == false) {
