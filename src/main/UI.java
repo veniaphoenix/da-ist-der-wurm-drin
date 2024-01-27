@@ -63,12 +63,12 @@ public class UI {
 			// new coordinates for each worm
 			Color c = new Color(255, 0, 0);
 			g2.setColor(c);
-			
-			//for testing the tilt of lower layer
+
+			// for testing the tilt of lower layer
 			g2.fillRect(0, 185, 1680, 5);
-			
-			//for testing the tilt of upper layer
-			g2.fillRect((int)(gp.screenWidth/10 * 8.7), 0, 5, 1050);
+
+			// for testing the tilt of upper layer
+			g2.fillRect((int) (gp.screenWidth / 10 * 8.7), 0, 5, 1050);
 		}
 		if (gp.gameState == gp.inventoryState) {
 			drawGameScreen();
@@ -89,12 +89,14 @@ public class UI {
 
 	public void drawGameScreen() {
 		// int pos = (int) (gp.gridSize * 2.5);
-		// g2.drawImage(daisyImage, pos, 0, gp.screenWidth / 5 - 15, gp.screenHeight, null);
+		// g2.drawImage(daisyImage, pos, 0, gp.screenWidth / 5 - 15, gp.screenHeight,
+		// null);
 		// pos += gp.screenWidth / 15 + gp.screenWidth / 5 - 15;
-		// g2.drawImage(strawImage, pos, 0, (int) (gp.screenWidth * 0.15), gp.screenHeight, null);
+		// g2.drawImage(strawImage, pos, 0, (int) (gp.screenWidth * 0.15),
+		// gp.screenHeight, null);
 		// pos += gp.screenWidth / 15 + (int) (gp.screenWidth * 0.15);
 		// g2.drawImage(finishImage, pos, 0, gp.screenWidth / 4, gp.screenHeight, null);
-		g2.drawImage(upper, 200, 50, gp.screenWidth / 4 * 3, gp.screenHeight/9 * 8, null);
+		g2.drawImage(upper, 200, 50, gp.screenWidth / 4 * 3, gp.screenHeight / 9 * 8, null);
 	}
 
 	public void drawInventory() {
@@ -378,7 +380,7 @@ public class UI {
 
 			// drawString(1f, 150f, gp.screenHeight / 3, text, 130);
 			// if (counterReached(480)) {
-			// 	scencePhase++;
+			// scencePhase++;
 			// }
 			scencePhase++;
 		}
@@ -425,7 +427,7 @@ public class UI {
 		int frameY = gp.gridSize * 3;
 		drawSubWindow(frameX, frameY, frameWidth, frameHeight, textOption);
 		int textY = (int) (gp.gridSize * 4.6);
-		Color c = new Color(0, 0, 205); //blue
+		Color c = new Color(0, 0, 205); // blue
 		g2.setColor(c);
 		g2.drawString("Blue", frameX + getXForCenteredTextSubWindow(frameWidth, "Blue"), textY);
 		g2.setStroke(new BasicStroke(5));
@@ -433,7 +435,7 @@ public class UI {
 			g2.drawRoundRect(frameX + 10, textY - getTextHeight(), frameWidth - 20, getTextHeight() + 10, 25, 25);
 		}
 		textY += gp.gridSize * 0.7;
-		c = new Color(220, 20, 60); //red
+		c = new Color(220, 20, 60); // red
 		g2.setColor(c);
 		g2.drawString("Red", frameX + getXForCenteredTextSubWindow(frameWidth, "Red"), textY);
 		g2.setStroke(new BasicStroke(5));
@@ -443,7 +445,7 @@ public class UI {
 		}
 		if (numberOfPlayer >= 3) {
 			textY += gp.gridSize * 0.7;
-			c = new Color(255, 250, 250); //white
+			c = new Color(255, 250, 250); // white
 			g2.setColor(c);
 			g2.drawString("White", frameX + getXForCenteredTextSubWindow(frameWidth, "White"), textY);
 			g2.setStroke(new BasicStroke(5));
@@ -451,10 +453,10 @@ public class UI {
 				g2.drawRoundRect(frameX + 10, textY - getTextHeight(), frameWidth - 20, getTextHeight() + 10, 25, 25);
 			}
 		}
-		
+
 		if (numberOfPlayer >= 4) {
 			textY += gp.gridSize * 0.7;
-			c = new Color(255, 127, 80); //orange
+			c = new Color(255, 127, 80); // orange
 			g2.setColor(c);
 			g2.drawString("Orange", frameX + getXForCenteredTextSubWindow(frameWidth, "Orange"), textY);
 			g2.setStroke(new BasicStroke(5));
@@ -481,13 +483,14 @@ public class UI {
 
 	public void drawItem() {
 		for (Player player : gp.players) {
-			int pos = (int) (gp.gridSize * 2.5);
-			if(gp.daisyCrossed == false) {
+			int pos = (int) (gp.screenWidth/10 * 3.6);
+			if (gp.daisyCrossed == false) {
 				if (player.useDaisy) {
 					try {
 						daisyObjectImage = ImageIO
 								.read(getClass().getResourceAsStream("/image/daisy/" + player.color + "_daisy.png"));
-						g2.drawImage(daisyObjectImage, pos + 150 - (int)(player.indexDaisyPlayerUsed*gp.gridSize*0.4), 
+						g2.drawImage(daisyObjectImage,
+								pos - (int) (player.indexDaisyPlayerUsed * gp.screenWidth/10*0.2),
 								player.yPlayerUsedItem_1_On, 80, 80, null);
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -497,10 +500,11 @@ public class UI {
 			if (gp.berryCrossed == false) {
 				if (player.useStrawberry) {
 					try {
-						berryObjectImage = ImageIO
-								.read(getClass().getResourceAsStream("/image/strawberry/" + player.color + "_berry.png"));
-						pos += gp.screenWidth / 15 + gp.screenWidth / 5 - 15;
-						g2.drawImage(berryObjectImage, pos + 150 - (int)(player.indexBerryPlayerUsed*gp.gridSize*0.4), 
+						berryObjectImage = ImageIO.read(
+								getClass().getResourceAsStream("/image/strawberry/" + player.color + "_berry.png"));
+						pos += (int)(gp.screenWidth/10 * 2.4);
+						g2.drawImage(berryObjectImage,
+								pos - (int) (player.indexBerryPlayerUsed * gp.screenWidth/10*0.2),
 								player.yPlayerUsedItem_2_On, 80, 80, null);
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -511,22 +515,21 @@ public class UI {
 	}
 
 	public void checkCrossed() {
-		final int daisyPos = gp.screenWidth/10 * 3;
-		final int berryPos =  (int)(gp.screenWidth/10 * 5.4);
-		if(!gp.berryCrossed) {
+		final int daisyPos = gp.screenWidth / 10 * 3;
+		final int berryPos = (int) (gp.screenWidth / 10 * 5.4);
+		if (!gp.berryCrossed) {
 			for (Player player : gp.players) {
-				if(player.x + 80 >= daisyPos && player.x < berryPos && gp.daisyCrossed == false) {
-					for(Player bonusPlayer : gp.players) {
+				if (player.x + 80 >= daisyPos && player.x < berryPos && gp.daisyCrossed == false) {
+					for (Player bonusPlayer : gp.players) {
 						if (bonusPlayer.yPlayerUsedItem_1_On == player.y) {
-							
+
 							bonusPlayer.bonus = 1;
 						}
 					}
 					gp.daisyCrossed = true;
 					return;
-				}
-				else if (player.x + 80 >= berryPos && gp.berryCrossed == false) {
-					for(Player bonusPlayer : gp.players) {
+				} else if (player.x + 80 >= berryPos && gp.berryCrossed == false) {
+					for (Player bonusPlayer : gp.players) {
 						if (bonusPlayer.yPlayerUsedItem_2_On == player.y) {
 
 							bonusPlayer.bonus = 2;
@@ -538,9 +541,10 @@ public class UI {
 				}
 			}
 		}
-		
-		//System.out.println(daisyCrossed + " " + berryCrossed);
+
+		// System.out.println(daisyCrossed + " " + berryCrossed);
 	}
+
 	public int getXForCenteredText(String text) {
 		int length = g2.getFontMetrics().stringWidth(text);
 		int x = (gp.screenWidth - length) / 2;
