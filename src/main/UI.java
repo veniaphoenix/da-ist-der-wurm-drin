@@ -68,7 +68,7 @@ public class UI {
 			g2.fillRect(0, 185, 1680, 5);
 
 			// for testing the tilt of upper layer
-			g2.fillRect((int) (gp.screenWidth / 10 * 8.7), 0, 5, 1050);
+			g2.fillRect((int) (gp.screenWidth / 10 * 3.98), 0, 5, 1050);
 		}
 		if (gp.gameState == gp.inventoryState) {
 			drawGameScreen();
@@ -88,14 +88,6 @@ public class UI {
 	}
 
 	public void drawGameScreen() {
-		// int pos = (int) (gp.gridSize * 2.5);
-		// g2.drawImage(daisyImage, pos, 0, gp.screenWidth / 5 - 15, gp.screenHeight,
-		// null);
-		// pos += gp.screenWidth / 15 + gp.screenWidth / 5 - 15;
-		// g2.drawImage(strawImage, pos, 0, (int) (gp.screenWidth * 0.15),
-		// gp.screenHeight, null);
-		// pos += gp.screenWidth / 15 + (int) (gp.screenWidth * 0.15);
-		// g2.drawImage(finishImage, pos, 0, gp.screenWidth / 4, gp.screenHeight, null);
 		g2.drawImage(upper, 200, 50, gp.screenWidth / 4 * 3, gp.screenHeight / 9 * 8, null);
 	}
 
@@ -588,9 +580,6 @@ public class UI {
 	public void getImage() {
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/image/title/logo.png"));
-			daisyImage = ImageIO.read(getClass().getResourceAsStream("/image/misc/map_daisy.png"));
-			strawImage = ImageIO.read(getClass().getResourceAsStream("/image/misc/map_straw.png"));
-			finishImage = ImageIO.read(getClass().getResourceAsStream("/image/misc/map_end.png"));
 			text = ImageIO.read(getClass().getResourceAsStream("/image/title/text.png"));
 			upper = ImageIO.read(getClass().getResourceAsStream("/image/misc/map-upper-layer.png"));
 
