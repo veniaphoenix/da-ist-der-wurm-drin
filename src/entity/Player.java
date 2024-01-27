@@ -106,7 +106,7 @@ public class Player extends Entity {
 				gp.gameState = gp.playState;
 				x_temp = x;
 				gp.dice.rolled = false;
-				if (x >= (int)(gp.screenWidth/10 * 8.7)) {
+				if (x >= (int)(gp.screenWidth/10 * 8.7) - 80) {
 					win = true;
 					gp.gameState = gp.ending;
 					// return;

@@ -394,6 +394,16 @@ public class UI {
 		}
 
 		if (scencePhase == 6) {
+			drawBlackBackground(1f);
+			String text = "Thank you\nDr. Logofatu\nfor a fun Java course";
+
+			drawString(1f, 150f, gp.screenHeight / 3, text, 120);
+			if (counterReached(480)) {
+				scencePhase++;
+			}
+		}
+
+		if (scencePhase == 7) {
 			scencePhase = 0;
 			gp.retry();
 			gp.gameState = gp.titleState;
