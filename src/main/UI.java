@@ -165,7 +165,7 @@ public class UI {
 			// new game
 			text = "NEW GAME";
 			x = getXForCenteredText(text);
-			y = (int) (gp.gridSize * 7.3);
+			y = (int) (gp.gridSize * 9);
 			drawBorder(text, x, y);
 			g2.setColor(Color.white);
 			g2.drawString(text, x, y);
@@ -183,7 +183,7 @@ public class UI {
 
 			text = "OPTION";
 			x = getXForCenteredText(text);
-			y += gp.gridSize * 2;
+			y += gp.gridSize * 1.5;
 			drawBorder(text, x, y);
 			g2.setColor(Color.white);
 			g2.drawString(text, x, y);
@@ -201,7 +201,7 @@ public class UI {
 
 			text = "EXIT GAME";
 			x = getXForCenteredText(text);
-			y += gp.gridSize * 2;
+			y += gp.gridSize * 1.5;
 			drawBorder(text, x, y);
 			g2.setColor(Color.white);
 			g2.drawString(text, x, y);
@@ -236,7 +236,7 @@ public class UI {
 			// choose player
 			text = "2 Players";
 			x = getXForCenteredText(text);
-			y = (int) (gp.gridSize * 6);
+			y = (int) (gp.gridSize * 8);
 			drawBorder(text, x, y);
 			g2.setColor(Color.white);
 			g2.drawString(text, x, y);
