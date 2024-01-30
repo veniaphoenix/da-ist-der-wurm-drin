@@ -20,7 +20,7 @@ public class UI {
 	Graphics2D g2;
 	Font CHLORINR, pixelFont;
 	public BufferedImage image, text, diceImage, daisyImage, strawImage, finishImage, daisyObjectImage,
-			berryObjectImage, upper;
+			berryObjectImage, upper, tutorial;
 	int commandNum = 0;
 	int numberOfPlayer = 2;
 	float image_scale = 3 / 4;
@@ -65,10 +65,10 @@ public class UI {
 			g2.setColor(c);
 
 			// for testing the tilt of lower layer
-			g2.fillRect(0, 185, 1680, 5);
-
-			// for testing the tilt of upper layer
-			g2.fillRect((int) (gp.screenWidth / 10 * 3.98), 0, 5, 1050);
+//			g2.fillRect(0, 185, 1680, 5);
+//
+//			// for testing the tilt of upper layer
+//			g2.fillRect((int) (gp.screenWidth / 10 * 3.98), 0, 5, 1050);
 		}
 		if (gp.gameState == gp.inventoryState) {
 			drawGameScreen();
@@ -84,6 +84,9 @@ public class UI {
 			drawOptionWindow();
 			drawInventory();
 			drawItem();
+		}
+		if (gp.gameState == gp.optionTitleState) {
+			drawTutorial();
 		}
 	}
 
@@ -121,6 +124,10 @@ public class UI {
 		g2.setColor(Color.white);
 		g2.setStroke(new BasicStroke(3));
 		g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorheight, 10, 10);
+	}
+	
+	public void drawTutorial() {
+		g2.drawImage(tutorial, 0, 0, gp.screenWidth, gp.screenHeight, gp);
 	}
 
 	// INVENTORY WINDOW
@@ -181,7 +188,7 @@ public class UI {
 				g2.drawString("◄", x + length + gp.gridSize / 2, y);
 			}
 
-			text = "OPTION";
+			text = "TUTORIAL";
 			x = getXForCenteredText(text);
 			y += gp.gridSize * 2;
 			drawBorder(text, x, y);
@@ -582,6 +589,7 @@ public class UI {
 			image = ImageIO.read(getClass().getResourceAsStream("/image/title/logo.png"));
 			text = ImageIO.read(getClass().getResourceAsStream("/image/title/text.png"));
 			upper = ImageIO.read(getClass().getResourceAsStream("/image/misc/map-upper-layer.png"));
+			tutorial = ImageIO.read(getClass().getResourceAsStream("/image/misc/tutorial.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
