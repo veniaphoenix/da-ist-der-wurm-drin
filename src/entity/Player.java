@@ -57,7 +57,7 @@ public class Player extends Entity {
 		added = true;
 		x = gp.screenWidth/14;
 		x_temp = x;
-		y = (int)(gp.screenHeight/5) + playerIndex * (int)(gp.screenHeight/5.8);
+		y = (int)(gp.screenHeight/5.2) + playerIndex * (int)(gp.screenHeight/5.8);
 		speed = 2;
 		bonus = 0;
 		direction = "right";

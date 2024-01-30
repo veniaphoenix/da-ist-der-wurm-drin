@@ -60,15 +60,15 @@ public class UI {
 		if (gp.gameState == gp.playState || gp.gameState == gp.pauseState) {
 			drawGameScreen();
 			drawItem();
-			// new coordinates for each worm
-			Color c = new Color(255, 0, 0);
-			g2.setColor(c);
+			// // new coordinates for each worm
+			// Color c = new Color(255, 0, 0);
+			// g2.setColor(c);
 
-			// for testing the tilt of lower layer
-			g2.fillRect(0, 185, 1680, 5);
+			// // for testing the tilt of lower layer
+			// g2.fillRect(0, 185, 1680, 5);
 
-			// for testing the tilt of upper layer
-			g2.fillRect((int) (gp.screenWidth / 10 * 3.98), 0, 5, 1050);
+			// // for testing the tilt of upper layer
+			// g2.fillRect((int) (gp.screenWidth / 10 * 3.98), 0, 5, 1050);
 		}
 		if (gp.gameState == gp.inventoryState) {
 			drawGameScreen();
