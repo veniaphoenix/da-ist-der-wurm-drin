@@ -67,7 +67,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void setupGame() {
-		// playMusic(0);
+		playMusic(0);
 		Player newPlayer = new Player(this, this.keyH, 0);
 		this.addPlayer(newPlayer);
 		this.daisyCrossed = false;
