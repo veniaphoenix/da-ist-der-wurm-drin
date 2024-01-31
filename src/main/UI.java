@@ -97,8 +97,7 @@ public class UI {
 		int x = (int) (gp.screenWidth / 10 * 1.25);
 		int y = (int) (gp.screenHeight / 10);
 		g2.drawImage(upper, x, y, width, height, null);
-		
-//		g2.fillRect((int)(gp.screenWidth/10 * 1.3), (int)(gp.screenHeight/10*1), 1680, 5);
+
 	}
 
 	public void drawInventory() {
@@ -132,7 +131,7 @@ public class UI {
 		g2.setStroke(new BasicStroke(3));
 		g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorheight, 10, 10);
 	}
-	
+
 	public void drawTutorial() {
 		g2.drawImage(tutorial, 0, 0, gp.screenWidth, gp.screenHeight, gp);
 	}
@@ -499,14 +498,14 @@ public class UI {
 
 	public void drawItem() {
 		for (Player player : gp.players) {
-			int pos = (int) (gp.screenWidth/10 * 3.6);
+			int pos = (int) (gp.screenWidth / 10 * 3.6);
 			if (gp.daisyCrossed == false) {
 				if (player.useDaisy) {
 					try {
 						daisyObjectImage = ImageIO
 								.read(getClass().getResourceAsStream("/image/daisy/" + player.color + "_daisy.png"));
 						g2.drawImage(daisyObjectImage,
-								pos - (int) (player.indexDaisyPlayerUsed * gp.screenWidth/10*0.2),
+								pos - (int) (player.indexDaisyPlayerUsed * gp.screenWidth / 10 * 0.2),
 								player.yPlayerUsedItem_1_On, 80, 80, null);
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -518,9 +517,9 @@ public class UI {
 					try {
 						berryObjectImage = ImageIO.read(
 								getClass().getResourceAsStream("/image/strawberry/" + player.color + "_berry.png"));
-						pos += (int)(gp.screenWidth/10 * 2.4);
+						pos += (int) (gp.screenWidth / 10 * 2.4);
 						g2.drawImage(berryObjectImage,
-								pos - (int) (player.indexBerryPlayerUsed * gp.screenWidth/10*0.2),
+								pos - (int) (player.indexBerryPlayerUsed * gp.screenWidth / 10 * 0.2),
 								player.yPlayerUsedItem_2_On, 80, 80, null);
 					} catch (IOException e) {
 						e.printStackTrace();
