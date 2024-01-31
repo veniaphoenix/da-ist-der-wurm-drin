@@ -32,6 +32,7 @@ public class UI {
 	public int scencePhase = 0;
 	int counter = 0;
 	float alpha;
+	double scale;
 
 	public UI(GamePanel gp) {
 		this.gp = gp;
@@ -91,7 +92,18 @@ public class UI {
 	}
 
 	public void drawGameScreen() {
-		g2.drawImage(upper, 200, 50, gp.screenWidth / 4 * 3, gp.screenHeight / 9 * 8, null);
+		scale = 1;
+		int width = gp.screenWidth;
+		int height = gp.screenHeight;
+		if (gp.screenWidth == 1680) {
+			width = 1314;
+			height = 791;
+		}
+//		System.out.println((int)(109*scale));
+		
+		g2.drawImage(upper, (int)(gp.screenWidth/10 * 1.2),(int)(gp.screenHeight/10), width, height, null);
+		
+//		g2.fillRect((int)(gp.screenWidth/10 * 1.3), (int)(gp.screenHeight/10*1), 1680, 5);
 	}
 
 	public void drawInventory() {
