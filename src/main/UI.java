@@ -92,16 +92,11 @@ public class UI {
 	}
 
 	public void drawGameScreen() {
-		scale = 1;
-		int width = gp.screenWidth;
-		int height = gp.screenHeight;
-		if (gp.screenWidth == 1680) {
-			width = 1314;
-			height = 791;
-		}
-//		System.out.println((int)(109*scale));
-		
-		g2.drawImage(upper, (int)(gp.screenWidth/10 * 1.2),(int)(gp.screenHeight/10), width, height, null);
+		int width = (int) (gp.screenWidth / 10 * 7.6);
+		int height = (int) (gp.screenHeight / 10 * 8);
+		int x = (int) (gp.screenWidth / 10 * 1.25);
+		int y = (int) (gp.screenHeight / 10);
+		g2.drawImage(upper, x, y, width, height, null);
 		
 //		g2.fillRect((int)(gp.screenWidth/10 * 1.3), (int)(gp.screenHeight/10*1), 1680, 5);
 	}
