@@ -213,7 +213,10 @@ public class KeyHandler implements KeyListener {
 			if (code == KeyEvent.VK_ESCAPE) {
 				gp.gameState = gp.titleState;
 			}
-			
+			else if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_RIGHT){
+				gp.tutorial_page++;
+				gp.tutorial_page %=2;
+			}
 		}
 	}
 

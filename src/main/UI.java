@@ -20,7 +20,7 @@ public class UI {
 	Graphics2D g2;
 	Font CHLORINR, pixelFont;
 	public BufferedImage image, text, diceImage, daisyImage, strawImage, finishImage, daisyObjectImage,
-			berryObjectImage, upper, tutorial;
+			berryObjectImage, upper, tutorial, tutorial_1;
 	int commandNum = 0;
 	int numberOfPlayer = 2;
 	float image_scale = 3 / 4;
@@ -29,6 +29,7 @@ public class UI {
 	public String textOption = "Which player do you\nexpect to come first?";
 	int slotRow = 0;
 	int slotCol = 0;
+	
 	public int scencePhase = 0;
 	int counter = 0;
 	float alpha;
@@ -65,11 +66,11 @@ public class UI {
 			// Color c = new Color(255, 0, 0);
 			// g2.setColor(c);
 
-			// for testing the tilt of lower layer
+			// // for testing the tilt of lower layer
 			// g2.fillRect(0, 185, 1680, 5);
 
 			// // for testing the tilt of upper layer
-			// g2.fillRect((int) (gp.screenWidth / 10 * 3.98), 0, 5, 1050);
+			// g2.fillRect((int) (gp.screenWidth / 12 * 10.55), 0, 5, 1050);
 		}
 		if (gp.gameState == gp.inventoryState) {
 			drawGameScreen();
@@ -133,7 +134,13 @@ public class UI {
 	}
 
 	public void drawTutorial() {
-		g2.drawImage(tutorial, 0, 0, gp.screenWidth, gp.screenHeight, gp);
+		if(gp.tutorial_page == 0)
+		{
+			g2.drawImage(tutorial, 0, 0, gp.screenWidth, gp.screenHeight, gp);
+		}
+		else{
+			g2.drawImage(tutorial_1, 0, 0, gp.screenWidth, gp.screenHeight, gp);
+		}
 	}
 
 	// INVENTORY WINDOW
@@ -530,8 +537,8 @@ public class UI {
 	}
 
 	public void checkCrossed() {
-		final int daisyPos = (int) (gp.screenWidth / 10 * 3.98);
-		final int berryPos = (int) (gp.screenWidth / 10 * 6.4);
+		final int daisyPos = (int) (gp.screenWidth / 12 * 4.9);
+		final int berryPos = (int) (gp.screenWidth / 10 * 6.5);
 		if (!gp.berryCrossed) {
 			for (Player player : gp.players) {
 				if (player.x + 80 >= daisyPos && player.x < berryPos && gp.daisyCrossed == false) {
@@ -596,6 +603,7 @@ public class UI {
 			text = ImageIO.read(getClass().getResourceAsStream("/image/title/text.png"));
 			upper = ImageIO.read(getClass().getResourceAsStream("/image/misc/map-upper-layer.png"));
 			tutorial = ImageIO.read(getClass().getResourceAsStream("/image/misc/tutorial.png"));
+			tutorial_1 = ImageIO.read(getClass().getResourceAsStream("/image/misc/tutorial_page.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();

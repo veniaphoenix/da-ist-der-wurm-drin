@@ -55,9 +55,9 @@ public class Player extends Entity {
 		isMoving = false;
 		changePlayer = false;
 		added = true;
-		x = gp.screenWidth/14;
+		x = gp.screenWidth/13;
 		x_temp = x;
-		y = (int)(gp.screenHeight/5.2) + playerIndex * (int)(gp.screenHeight/5.8);
+		y = (int)(gp.screenHeight/4.5) + playerIndex * (int)(gp.screenHeight/6.4);
 		speed = 2;
 		bonus = 0;
 		direction = "right";
@@ -106,7 +106,7 @@ public class Player extends Entity {
 				gp.gameState = gp.playState;
 				x_temp = x;
 				gp.dice.rolled = false;
-				if (x >= (int)(gp.screenWidth/10 * 8.7) - 80) {
+				if (x >= (int) (gp.screenWidth / 12 * 10.55) - 80) {
 					win = true;
 					gp.gameState = gp.ending;
 					// return;
