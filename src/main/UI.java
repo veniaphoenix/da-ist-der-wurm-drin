@@ -102,8 +102,8 @@ public class UI {
 	}
 
 	public void drawInventory() {
-		int frameX = gp.gridSize * 20;
-		int frameY = (int) (gp.gridSize * 0.5);
+		int frameX = gp.screenWidth/10 * 8;
+		int frameY = (int) (gp.gridSize * 0.8);
 		int frameWidth = gp.gridSize * 3;
 		int frameHeight = gp.gridSize * 2;
 		drawSubWindow(frameX, frameY, frameWidth, frameHeight, textInventory);
@@ -339,7 +339,7 @@ public class UI {
 			// can insert winning music here
 			gp.playSE(2);
 			gp.background.draw(g2, gp.playState);
-			gp.dice.draw(g2, 1565, 780);
+			gp.dice.draw(g2, gp.screenWidth/10 * 8, gp.screenHeight/10);
 			for (Player player : gp.players) {
 				player.draw(g2);
 			}
@@ -445,7 +445,7 @@ public class UI {
 	public void drawOptionWindow() {
 		int frameWidth = gp.gridSize * 4;
 		int frameHeight = (int) (gp.gridSize * 4.3);
-		int frameX = gp.gridSize * 20 - (frameWidth - gp.gridSize * 3) / 2;
+		int frameX = gp.screenWidth/10 * 8 - (frameWidth - gp.gridSize * 3)/2;
 		int frameY = gp.gridSize * 3;
 		drawSubWindow(frameX, frameY, frameWidth, frameHeight, textOption);
 		int textY = (int) (gp.gridSize * 4.6);
