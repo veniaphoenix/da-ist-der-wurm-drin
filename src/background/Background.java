@@ -22,7 +22,7 @@ public class Background {
 		try {
 			image[0] = ImageIO.read(getClass().getResourceAsStream("/image/title/wallpaperflare.com_wallpaper.png"));
 			// image[1] = ImageIO.read(getClass().getResourceAsStream("/image/misc/map-upper-layer.png"));
-			image[1] = ImageIO.read(getClass().getResourceAsStream("/image/misc/map-lower-layer.png"));
+			image[1] = ImageIO.read(getClass().getResourceAsStream("/image/misc/map-lower-layer1.png"));
 			image[2] = ImageIO.read(getClass().getResourceAsStream("/image/misc/map-upper-layer.png"));
 
 		} catch (IOException e) {
